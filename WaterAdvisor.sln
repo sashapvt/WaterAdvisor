@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DD0061AA-02BF-4800-96F6-A434FDB3FDC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F191829-3688-4A49-9E0F-1EDB46606D03}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WaterAdvisor", "src\WaterAdvisor\WaterAdvisor.xproj", "{B0367CF4-AF11-4A90-B389-52F7B6AE8FA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0367CF4-AF11-4A90-B389-52F7B6AE8FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0367CF4-AF11-4A90-B389-52F7B6AE8FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0367CF4-AF11-4A90-B389-52F7B6AE8FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0367CF4-AF11-4A90-B389-52F7B6AE8FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B0367CF4-AF11-4A90-B389-52F7B6AE8FA5} = {DD0061AA-02BF-4800-96F6-A434FDB3FDC4}
+	EndGlobalSection
+EndGlobal
