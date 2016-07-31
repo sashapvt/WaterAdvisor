@@ -1,0 +1,36 @@
+@model WaterAdvisor.Models.Project.Project
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProjectDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectComment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProjectComment)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
