@@ -8,9 +8,10 @@ namespace WaterAdvisor.Models.Project
 {
     public class Project
     {
+        // General
         public int Id { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        #region Інформація про проект
         // Інформація про проект
         [Display(Name = "Назва проекту")]
         [StringLength(100)]
@@ -22,7 +23,5 @@ namespace WaterAdvisor.Models.Project
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ProjectDate { get; set; }
-        #endregion
-
     }
 }

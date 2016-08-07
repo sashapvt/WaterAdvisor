@@ -25,5 +25,6 @@ namespace WaterAdvisor.Data
         }
 
         public DbSet<Project> Project { get; set; }
+        public DbSet<Water> Water { get; set; }
     }
 }

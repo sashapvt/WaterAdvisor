@@ -7,16 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WaterAdvisor.Data;
 using WaterAdvisor.Models.Project;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using WaterAdvisor.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace WaterAdvisor.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
 
-        public ProjectController(ApplicationDbContext context)
+        public ProjectController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;    
+            _userManager = userManager;
         }
 
         // GET: Project
@@ -57,6 +64,7 @@ namespace WaterAdvisor.Controllers
         {
             if (ModelState.IsValid)
             {
+                project.User = _userManager.FindByIdAsync(User.Identity.Name).Result;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

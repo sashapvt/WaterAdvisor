@@ -185,9 +185,27 @@ namespace WaterAdvisor.Data.Migrations
                     b.Property<string>("ProjectName")
                         .HasAnnotation("MaxLength", 100);
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Project");
+                });
+
+            modelBuilder.Entity("WaterAdvisor.Models.Project.Water", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ProjectId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Water");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -225,6 +243,20 @@ namespace WaterAdvisor.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WaterAdvisor.Models.Project.Project", b =>
+                {
+                    b.HasOne("WaterAdvisor.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("WaterAdvisor.Models.Project.Water", b =>
+                {
+                    b.HasOne("WaterAdvisor.Models.Project.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId");
                 });
         }
     }
