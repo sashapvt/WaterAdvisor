@@ -64,7 +64,7 @@ namespace WaterAdvisor.Controllers
         {
             if (ModelState.IsValid)
             {
-                project.User = _userManager.FindByIdAsync(User.Identity.Name).Result;
+                project.User = _userManager.FindByNameAsync(User.Identity.Name).Result;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

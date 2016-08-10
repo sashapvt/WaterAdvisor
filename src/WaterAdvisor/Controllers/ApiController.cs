@@ -32,14 +32,19 @@ namespace WaterAdvisor.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
+            //var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
+            var project = _context.Project
+                .Include(p => p.User)
+                .Where(i => i.Id == id)
+                .Single();
+
             if (project == null)
             {
                 return NotFound();
             }
 
             var userId = User.Identity.Name;
-            if (project.User.Id != userId)
+            if (project.User.UserName != userId)
             {
                 return Unauthorized();
             }
