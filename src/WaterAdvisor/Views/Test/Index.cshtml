@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Test";
+}
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <wateradvisor-app>Завантаження...</wateradvisor-app>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        System.config({
+            packages: { 'js': { defaultExtension: 'js' } }
+        });
+
+        System.import('js/app');
+    </script>
+}

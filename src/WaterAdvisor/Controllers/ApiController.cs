@@ -33,10 +33,10 @@ namespace WaterAdvisor.Controllers
             }
 
             //var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
-            var project = _context.Project
+            var project = await _context.Project
                 .Include(p => p.User)
                 .Where(i => i.Id == id)
-                .Single();
+                .SingleAsync();
 
             if (project == null)
             {
