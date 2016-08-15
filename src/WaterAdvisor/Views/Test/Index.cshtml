@@ -1,21 +1,45 @@
-﻿@{
+﻿@model WaterAdvisor.Models.Project.Project
+
+@{
     ViewData["Title"] = "Test";
 }
 
+<!-- This is a *view* - HTML markup that defines the appearance of your UI -->
+
+<p>First name: <strong data-bind="text: firstName"></strong></p>
+<p>Last name: <strong data-bind="text: lastName"></strong></p>
+
 <section id="content">
     <div class="container">
-        <div class="row">
-            <wateradvisor-app>Завантаження...</wateradvisor-app>
+        <h2>Details</h2>
+
+        <div>
+            <h4>Project</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProjectName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ProjectName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProjectDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ProjectDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProjectComment)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ProjectComment)
+                </dd>
+            </dl>
         </div>
     </div>
 </section>
 
 @section Scripts {
-    <script>
-        System.config({
-            packages: { 'js': { defaultExtension: 'js' } }
-        });
-
-        System.import('js/app');
-    </script>
+    <script src="~/js/app.js"></script>
 }

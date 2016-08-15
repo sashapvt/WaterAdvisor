@@ -15,6 +15,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <script src="~/lib/knockout/dist/knockout.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -48,10 +49,6 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-
-        <script src="https://code.angularjs.org/tools/system.js"></script>
-        <script src="https://code.angularjs.org/2.0.0-alpha.46/angular2.dev.js"></script>
-        <script src="https://code.angularjs.org/2.0.0-alpha.46/http.dev.js"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -63,10 +60,6 @@
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-
-        <script src="https://code.angularjs.org/tools/system.js"></script>
-        <script src="https://code.angularjs.org/2.0.0-alpha.46/angular2.min.js"></script>
-        <script src="https://code.angularjs.org/2.0.0-alpha.46/http.min.js"></script>
     </environment>
 
     @RenderSection("scripts", required: false)
