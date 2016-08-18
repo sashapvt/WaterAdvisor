@@ -12,5 +12,12 @@ namespace WaterAdvisor.Controllers
         {
             return View();
         }
+
+        // GET: Project/Edit/3
+        public IActionResult Edit(int? id)
+        {
+             return View("Index");
+        }
+
     }
 }
