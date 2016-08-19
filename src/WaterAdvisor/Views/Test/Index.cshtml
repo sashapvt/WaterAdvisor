@@ -5,9 +5,9 @@
 }
 
 <p>Id: <strong data-bind="text: Id"></strong></p>
-<p>ProjectName: <strong data-bind="text: projectName"></strong></p>
-<p>ProjectDate: <strong data-bind="text: projectDate"></strong></p>
-<p>ProjectComment: <strong data-bind="text: projectComment"></strong></p>
+<p>ProjectName: <strong data-bind="text: ProjectName"></strong></p>
+<p>ProjectDate: <strong data-bind="text: ProjectDate"></strong></p>
+<p>ProjectComment: <strong data-bind="text: ProjectComment"></strong></p>
 
 <button id="button_from_server">Оновити дані з сервера</button>
 <button id="button_to_server">Відправити дані на сервер</button>
@@ -21,21 +21,21 @@
         <div class="form-group">
             <label asp-for="ProjectName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProjectName" class="form-control" data-bind="value: projectName" />
+                <input asp-for="ProjectName" class="form-control" data-bind="value: ProjectName" />
                 <span asp-validation-for="ProjectName" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="ProjectDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProjectDate" class="form-control" data-bind="value: projectDate" />
+                <input asp-for="ProjectDate" class="form-control" data-bind="value: ProjectDate" />
                 <span asp-validation-for="ProjectDate" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="ProjectComment" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProjectComment" class="form-control" data-bind="value: projectComment" />
+                <input asp-for="ProjectComment" class="form-control" data-bind="value: ProjectComment" />
                 <span asp-validation-for="ProjectComment" class="text-danger" />
             </div>
         </div>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using WaterAdvisor.Data;
 using WaterAdvisor.Models.Project;
+using Newtonsoft.Json;
 
 namespace WaterAdvisor.Controllers
 {
@@ -49,7 +50,7 @@ namespace WaterAdvisor.Controllers
                 return Unauthorized();
             }
 
-            return Ok(project);
+            return Json(project, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include });
         }
 
         // POST: Api/Post
