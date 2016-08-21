@@ -8,7 +8,7 @@ using WaterAdvisor.Data;
 namespace WaterAdvisor.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160807125724_Initial")]
+    [Migration("20160821183713_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,11 +186,10 @@ namespace WaterAdvisor.Data.Migrations
                     b.Property<string>("ProjectName")
                         .HasAnnotation("MaxLength", 100);
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .HasAnnotation("MaxLength", 450);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Project");
                 });
@@ -244,13 +243,6 @@ namespace WaterAdvisor.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WaterAdvisor.Models.Project.Project", b =>
-                {
-                    b.HasOne("WaterAdvisor.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WaterAdvisor.Models.Project.Water", b =>

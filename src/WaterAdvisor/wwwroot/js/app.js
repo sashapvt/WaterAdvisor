@@ -17,8 +17,10 @@ function GetData() {
 
 // TODO: Розібрати помилку сервера у прийнятті даних. Додати обробку помилок з сервера? Взяти інший приклад даних? Підняти питання безпеки.
 function PostData() {
-    $.post('/Api/Post', ko.mapping.toJS(AppViewModel), function (data) {
-        alert(data);
+    var SendData = ko.mapping.toJS(AppViewModel);
+    console.log(SendData);
+    $.post('/Api/Post', SendData, function (data) {
+        console.log(data);
     }, 'json');
 }
 

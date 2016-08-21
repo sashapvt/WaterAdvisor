@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using WaterAdvisor.Data;
 using WaterAdvisor.Models.Project;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using WaterAdvisor.Models;
 
 namespace WaterAdvisor.Controllers
 {
@@ -17,11 +19,12 @@ namespace WaterAdvisor.Controllers
     public class ApiController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
 
-        public ApiController(ApplicationDbContext context)
+        public ApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
-
+            _userManager = userManager;
         }
 
         // GET: Api/Get/1
@@ -35,7 +38,6 @@ namespace WaterAdvisor.Controllers
 
             //var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
             var project = await _context.Project
-                .Include(p => p.User)
                 .Where(i => i.Id == id)
                 .SingleAsync();
 
@@ -44,8 +46,8 @@ namespace WaterAdvisor.Controllers
                 return NotFound();
             }
 
-            var userId = User.Identity.Name;
-            if (project.User.UserName != userId)
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
             {
                 return Unauthorized();
             }
@@ -79,8 +81,8 @@ namespace WaterAdvisor.Controllers
                 }
             }
 
-            var userId = User.Identity.Name;
-            if (project.User.Id != userId)
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
             {
                 return Unauthorized();
             }

@@ -29,7 +29,8 @@ namespace WaterAdvisor.Controllers
         // GET: Project
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Project.ToListAsync());
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            return View( await _context.Project.Where(Project => Project.UserId == currentUserId).ToListAsync());
         }
 
         // GET: Project/Details/5
@@ -44,6 +45,12 @@ namespace WaterAdvisor.Controllers
             if (project == null)
             {
                 return NotFound();
+            }
+
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
+            {
+                return Unauthorized();
             }
 
             return View(project);
@@ -64,7 +71,7 @@ namespace WaterAdvisor.Controllers
         {
             if (ModelState.IsValid)
             {
-                project.User = _userManager.FindByNameAsync(User.Identity.Name).Result;
+                project.UserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -85,6 +92,13 @@ namespace WaterAdvisor.Controllers
             {
                 return NotFound();
             }
+
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
+            {
+                return Unauthorized();
+            }
+
             return View(project);
         }
 
@@ -93,13 +107,15 @@ namespace WaterAdvisor.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectComment,ProjectDate,ProjectName")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ProjectComment,ProjectDate,ProjectName")] Project project)
         {
             if (id != project.Id)
             {
                 return NotFound();
             }
 
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId) return NotFound(); // Hack
             if (ModelState.IsValid)
             {
                 try
@@ -135,6 +151,12 @@ namespace WaterAdvisor.Controllers
             if (project == null)
             {
                 return NotFound();
+            }
+
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
+            {
+                return Unauthorized();
             }
 
             return View(project);

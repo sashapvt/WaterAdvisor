@@ -10,7 +10,8 @@ namespace WaterAdvisor.Models.Project
     {
         // General
         public int Id { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        [StringLength(450)]
+        public string UserId { get; set; }
 
         // Інформація про проект
         [Display(Name = "Назва проекту")]
