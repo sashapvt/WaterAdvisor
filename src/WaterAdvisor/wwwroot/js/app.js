@@ -15,13 +15,9 @@ function GetData() {
     }, 'json');
 }
 
-// TODO: Розібрати помилку сервера у прийнятті даних. Додати обробку помилок з сервера? Взяти інший приклад даних? Підняти питання безпеки.
 function PostData() {
-    var SendData = ko.mapping.toJS(AppViewModel);
-    console.log(SendData);
-    $.post('/Api/Post', SendData, function (data) {
-        console.log(data);
-    }, 'json');
+    var SendData = ko.mapping.toJSON(AppViewModel);
+    $.ajax({ url: '/Api/Post', type: 'post', data: SendData, contentType: 'application/json', success: function (data) { console.log('Post request result: ' + data); } });
 }
 
 $("#button_from_server").click(function () {

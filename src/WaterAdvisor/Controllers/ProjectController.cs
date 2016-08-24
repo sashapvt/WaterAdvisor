@@ -107,15 +107,14 @@ namespace WaterAdvisor.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ProjectComment,ProjectDate,ProjectName")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectComment,ProjectDate,ProjectName")] Project project)
         {
             if (id != project.Id)
             {
                 return NotFound();
             }
 
-            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            if (project.UserId != currentUserId) return NotFound(); // Hack
+            project.UserId = _context.Project.AsNoTracking().SingleOrDefault(m => m.Id == id).UserId;
             if (ModelState.IsValid)
             {
                 try

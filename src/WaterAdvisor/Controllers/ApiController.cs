@@ -36,10 +36,7 @@ namespace WaterAdvisor.Controllers
                 return NotFound();
             }
 
-            //var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
-            var project = await _context.Project
-                .Where(i => i.Id == id)
-                .SingleAsync();
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
 
             if (project == null)
             {
@@ -66,6 +63,11 @@ namespace WaterAdvisor.Controllers
 
             try
             {
+                var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+                if (project.UserId != currentUserId)
+                {
+                    return Unauthorized();
+                }
                 _context.Update(project);
                 await _context.SaveChangesAsync();
             }
@@ -79,12 +81,6 @@ namespace WaterAdvisor.Controllers
                 {
                     throw;
                 }
-            }
-
-            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            if (project.UserId != currentUserId)
-            {
-                return Unauthorized();
             }
 
             return this.CreatedAtAction("Get", new { }, true);
