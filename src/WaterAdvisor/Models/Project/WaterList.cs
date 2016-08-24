@@ -42,9 +42,13 @@ namespace WaterAdvisor.Models.Project
             Taste = new WaterComponent("Присмак", 0, WaterComponentType.Other);
 
             //Lists
-            Cations = new List<WaterComponent> { NH4, K, Na, Ca, Mg, Fe2, Fe3, Mn, Sr, Ba };
-            Anions = new List<WaterComponent> { HCO3, SO4, Cl, NO2, NO3, F, SiO2, PO4 };
+            _cations = new List<WaterComponent> { NH4, K, Na, Ca, Mg, Fe2, Fe3, Mn, Sr, Ba };
+            _anions = new List<WaterComponent> { HCO3, SO4, Cl, NO2, NO3, F, SiO2, PO4 };
         }
+
+        // Private lists
+        private List<WaterComponent> _cations;
+        private List<WaterComponent> _anions;
 
         // Cations
         public WaterComponent NH4 { get; private set; }
@@ -79,7 +83,7 @@ namespace WaterAdvisor.Models.Project
         public WaterComponent Taste { get; private set; }
 
         // Lists
-        public List<WaterComponent> Cations;
-        public List<WaterComponent> Anions;
+        public List<WaterComponent> Cations() { return _cations; }
+        public List<WaterComponent> Anions() { return _anions; }
     }
 }

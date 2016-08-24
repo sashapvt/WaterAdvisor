@@ -10,7 +10,7 @@ function GetData() {
         success: function (data) {
             console.log('Get request done');
             console.log(data);
-            if (AppViewModel == null) {
+            if (AppViewModel === null) {
                 AppViewModel = ko.mapping.fromJS(data);
                 ko.applyBindings(AppViewModel);
             }

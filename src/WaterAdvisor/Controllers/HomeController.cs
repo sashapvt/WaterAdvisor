@@ -19,7 +19,7 @@ namespace WaterAdvisor.Controllers
 
         public IActionResult Index()
         {
-            return View(new Home());
+            return View(new HomeViewModel());
         }
         
         // GET: /Home/Error

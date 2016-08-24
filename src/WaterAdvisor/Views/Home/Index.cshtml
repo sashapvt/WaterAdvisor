@@ -1,4 +1,4 @@
-﻿@model WaterAdvisor.Models.Project.Home
+﻿@model WaterAdvisor.Models.Project.HomeViewModel
 @{
     ViewData["Title"] = "Home";
 }
@@ -11,7 +11,7 @@
             <h4>Катіони</h4>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="project.Id" />
+            <input type="hidden" asp-for="Id" />
             <table class="table" width="100">
                 <thead>
                     <tr>
@@ -29,132 +29,132 @@
                 <tbody>
                     <tr>
                         <td>
-                            @Model.waterFeed.NH4.Name
+                            @Model.WaterIn.NH4.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.NH4.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.NH4.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.NH4.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.NH4.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.NH4.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.NH4.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.K.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.K.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.K.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.K.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.K.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.NH4.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.NH4.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Na.Name
+                            @Model.WaterIn.K.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Na.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Na.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.K.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.K.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Na.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Na.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.Ca.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.Ca.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Ca.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.Ca.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Ca.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.K.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.K.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Mg.Name
+                            @Model.WaterIn.Na.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Mg.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Mg.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Na.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Na.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Mg.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Mg.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.Fe2.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.Fe2.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Fe2.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.Fe2.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Fe2.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Na.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Na.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Fe3.Name
+                            @Model.WaterIn.Ca.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Fe3.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Fe3.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Ca.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Ca.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Fe3.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Fe3.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.Mn.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.Mn.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Mn.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.Mn.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Mn.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Ca.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Ca.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Sr.Name
+                            @Model.WaterIn.Mg.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Sr.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Sr.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Mg.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Mg.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Sr.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Sr.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Mg.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Mg.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Ba.Name
+                            @Model.WaterIn.Fe2.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Ba.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Ba.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Fe2.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Fe2.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Ba.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Ba.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Fe2.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Fe2.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.Fe3.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Fe3.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Fe3.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Fe3.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Fe3.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.Mn.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Mn.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Mn.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Mn.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Mn.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.Sr.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Sr.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Sr.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Sr.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Sr.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.Ba.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Ba.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Ba.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.Ba.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Ba.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                 </tbody>
@@ -167,8 +167,7 @@
             <h4>Аніони</h4>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="project.Id" />
-            <table class="table" width="100">
+             <table class="table" width="100">
                 <thead>
                     <tr>
                         <th class="col-md-4">
@@ -185,106 +184,106 @@
                 <tbody>
                     <tr>
                         <td>
-                            @Model.waterFeed.HCO3.Name
+                            @Model.WaterIn.HCO3.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.HCO3.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.HCO3.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.HCO3.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.HCO3.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.HCO3.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.HCO3.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.SO4.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.SO4.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.SO4.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.SO4.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.SO4.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.HCO3.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.HCO3.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Cl.Name
+                            @Model.WaterIn.SO4.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Cl.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Cl.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.SO4.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.SO4.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Cl.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Cl.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.NO2.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.NO2.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.NO2.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.NO2.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.NO2.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.SO4.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.SO4.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.NO3.Name
+                            @Model.WaterIn.Cl.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.NO3.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.NO3.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Cl.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Cl.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.NO3.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.NO3.ValueMEq" class="text-danger" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Model.waterFeed.F.Name
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.F.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.F.Value" class="text-danger" />
-                        </td>
-                        <td>
-                            <input asp-for="@Model.waterFeed.F.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.F.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Cl.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Cl.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.SiO2.Name
+                            @Model.WaterIn.NO2.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.SiO2.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.SiO2.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.NO2.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.NO2.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.SiO2.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.SiO2.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.NO2.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.NO2.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.PO4.Name
+                            @Model.WaterIn.NO3.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.PO4.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.PO4.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.NO3.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.NO3.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.PO4.ValueMEq" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.PO4.ValueMEq" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.NO3.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.NO3.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.F.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.F.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.F.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.F.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.F.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.SiO2.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.SiO2.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.SiO2.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.SiO2.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.SiO2.ValueMEq" class="text-danger" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Model.WaterIn.PO4.Name
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.PO4.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.PO4.Value" class="text-danger" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.WaterIn.PO4.ValueMEq" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.PO4.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
                 </tbody>
@@ -297,7 +296,6 @@
             <h4>Інше</h4>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="project.Id" />
             <table class="table" width="100">
                 <thead>
                     <tr>
@@ -314,11 +312,11 @@
                 <tbody>
                     <tr>
                         <td>
-                            @Model.waterFeed.pH.Name
+                            @Model.WaterIn.pH.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.pH.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.pH.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.pH.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.pH.Value" class="text-danger" />
                         </td>
                         <td>
                             од.
@@ -326,11 +324,11 @@
                     </tr>
                     <tr>
                         <td>
-                            @Model.waterFeed.Temperature.Name
+                            @Model.WaterIn.Temperature.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.waterFeed.Temperature.Value" class="form-control input-sm" />
-                            <span asp-validation-for="@Model.waterFeed.Temperature.Value" class="text-danger" />
+                            <input asp-for="@Model.WaterIn.Temperature.Value" class="form-control input-sm" />
+                            <span asp-validation-for="@Model.WaterIn.Temperature.Value" class="text-danger" />
                         </td>
                         <td>
                             град.

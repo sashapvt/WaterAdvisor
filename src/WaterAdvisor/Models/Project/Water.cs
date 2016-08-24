@@ -10,7 +10,6 @@ namespace WaterAdvisor.Models.Project
     {
         // General
         public int Id { get; set; }
-        public virtual Project Project { get; set; }
 
         // Cations
         public double NH4, K, Na, Ca, Mg, Fe2, Fe3, Mn, Sr, Ba;
