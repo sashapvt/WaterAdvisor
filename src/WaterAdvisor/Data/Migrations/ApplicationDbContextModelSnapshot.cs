@@ -188,7 +188,11 @@ namespace WaterAdvisor.Data.Migrations
                     b.Property<string>("UserId")
                         .HasAnnotation("MaxLength", 450);
 
+                    b.Property<int?>("WaterInId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WaterInId");
 
                     b.ToTable("Project");
                 });
@@ -198,11 +202,7 @@ namespace WaterAdvisor.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ProjectId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Water");
                 });
@@ -244,11 +244,11 @@ namespace WaterAdvisor.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WaterAdvisor.Models.Project.Water", b =>
+            modelBuilder.Entity("WaterAdvisor.Models.Project.Project", b =>
                 {
-                    b.HasOne("WaterAdvisor.Models.Project.Project", "Project")
+                    b.HasOne("WaterAdvisor.Models.Project.Water", "WaterIn")
                         .WithMany()
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("WaterInId");
                 });
         }
     }

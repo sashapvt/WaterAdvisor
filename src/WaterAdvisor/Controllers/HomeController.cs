@@ -17,11 +17,21 @@ namespace WaterAdvisor.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? Id)
         {
-            return View(new HomeViewModel());
+            // Todo: Fix cookies, maybe routing
+            if (Id != null)
+            {
+                if (Request.Cookies["lastProjectOpenedId"] != null) Response.Cookies.Delete("lastProjectOpenedId");
+                Response.Cookies.Append("lastProjectOpenedId", Id.ToString());
+                return View(new HomeViewModel());
+            }
+            if (Request.Cookies["lastProjectOpenedId"] == null)
+                return Redirect("/Project");
+            else
+                return Redirect("Home/Index/" + Request.Cookies["lastProjectOpenedId"]);
         }
-        
+
         // GET: /Home/Error
         public ActionResult Error(int HttpCode, string message)
         {
