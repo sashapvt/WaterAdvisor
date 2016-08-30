@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.ProjectComment)
             </td>
             <td>
-                <a asp-controller="Home" asp-action="" asp-route-id="@item.Id">Open</a> |
+                <a href="/?id=@item.Id">Open</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
