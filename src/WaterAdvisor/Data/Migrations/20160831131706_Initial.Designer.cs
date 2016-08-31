@@ -8,7 +8,7 @@ using WaterAdvisor.Data;
 namespace WaterAdvisor.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160829183421_Initial")]
+    [Migration("20160831131706_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,6 +202,58 @@ namespace WaterAdvisor.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Ba");
+
+                    b.Property<double>("Ca");
+
+                    b.Property<double>("Cl");
+
+                    b.Property<double>("Colority");
+
+                    b.Property<double>("F");
+
+                    b.Property<double>("Fe2");
+
+                    b.Property<double>("Fe3");
+
+                    b.Property<double>("HCO3");
+
+                    b.Property<double>("K");
+
+                    b.Property<double>("Mg");
+
+                    b.Property<double>("Mn");
+
+                    b.Property<double>("NH4");
+
+                    b.Property<double>("NO2");
+
+                    b.Property<double>("NO3");
+
+                    b.Property<double>("Na");
+
+                    b.Property<double>("Odor");
+
+                    b.Property<double>("Oxidability");
+
+                    b.Property<double>("PO4");
+
+                    b.Property<double>("SO4");
+
+                    b.Property<double>("SiO2");
+
+                    b.Property<double>("Sr");
+
+                    b.Property<double>("TSS");
+
+                    b.Property<double>("Taste");
+
+                    b.Property<double>("Temperature");
+
+                    b.Property<double>("Turbidity");
+
+                    b.Property<double>("pH");
 
                     b.HasKey("Id");
 

@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,7 +39,7 @@ namespace WaterAdvisor.Controllers
                 Response.Cookies.Append("lastProjectOpenedId",id.ToString());
 
                 var homeViewModel = new HomeViewModel();
-                var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
+                var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == id);
                 if (project == null)
                 {
                     return NotFound();
@@ -66,14 +66,14 @@ namespace WaterAdvisor.Controllers
             {
                 case 404:
                     // page not found
-                    Title = "Помилка. Сторінку не знайдено";
+                    Title = "РџРѕРјРёР»РєР°. РЎС‚РѕСЂС–РЅРєСѓ РЅРµ Р·РЅР°Р№РґРµРЅРѕ";
                     break;
                 case 500:
                     // server error
-                    Title = "Помилка. Проблема на сервері";
+                    Title = "РџРѕРјРёР»РєР°. РџСЂРѕР±Р»РµРјР° РЅР° СЃРµСЂРІРµСЂС–";
                     break;
                 default:
-                    Title = "Загальна помилка";
+                    Title = "Р—Р°РіР°Р»СЊРЅР° РїРѕРјРёР»РєР°";
                     break;
             }
 
@@ -93,8 +93,7 @@ namespace WaterAdvisor.Controllers
             model.ProjectDate = project.ProjectDate;
             model.ProjectName = project.ProjectName;
             // TODO: Get waterlist
-            model.WaterIn = new WaterList();
-            model.WaterIn.NH4.Value = 1;
+            if (project.WaterIn == null) model.WaterIn = new WaterList(); else model.WaterIn.GetWater(project.WaterIn);
         }
     }
 }
