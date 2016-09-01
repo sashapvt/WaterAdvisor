@@ -51,7 +51,7 @@ namespace WaterAdvisor.Controllers
                     return Unauthorized();
                 }
 
-                MapProject(homeViewModel, project);
+                LoadProject(homeViewModel, project);
 
                 return View(homeViewModel);
             }
@@ -85,15 +85,25 @@ namespace WaterAdvisor.Controllers
 
         // Helpers
 
-        // Map project
-        private void MapProject(HomeViewModel model, Project project)
+        // Load project
+        private void LoadProject(HomeViewModel model, Project project)
         {
             model.Id = project.Id;
             model.ProjectComment = project.ProjectComment;
             model.ProjectDate = project.ProjectDate;
             model.ProjectName = project.ProjectName;
-            // TODO: Get waterlist
-            if (project.WaterIn == null) model.WaterIn = new WaterList(); else model.WaterIn.GetWater(project.WaterIn);
+            if (project.WaterIn == null) model.WaterIn = new WaterList(); else model.WaterIn.ImportWater(project.WaterIn);
         }
+
+        // Save project
+        private void SaveProject(HomeViewModel model, Project project)
+        {
+            project.Id = model.Id;
+            project.ProjectComment = model.ProjectComment;
+            project.ProjectDate = model.ProjectDate;
+            project.ProjectName = model.ProjectName;
+            project.WaterIn = model.WaterIn.ExportWater();
+        }
+
     }
 }

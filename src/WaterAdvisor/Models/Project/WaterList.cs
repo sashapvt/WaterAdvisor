@@ -87,7 +87,7 @@ namespace WaterAdvisor.Models.Project
         public List<WaterComponent> Anions() { return _anions; }
 
         // Import to Water model
-        public void GetWater(Water water)
+        public void ImportWater(Water water)
         {
             // Cations
             NH4.Value = water.NH4;
@@ -120,6 +120,46 @@ namespace WaterAdvisor.Models.Project
             Odor.Value = water.Odor;
             Colority.Value = water.Colority;
             Taste.Value = water.Taste;
+        }
+
+        // Export to Water model
+        public Water ExportWater()
+        {
+            var water = new Water();
+
+            // Cations
+            water.NH4 = NH4.Value;
+            water.K = K.Value;
+            water.Na = Na.Value;
+            water.Ca = Ca.Value;
+            water.Mg = Mg.Value;
+            water.Fe2 = Fe2.Value;
+            water.Fe3 = Fe3.Value;
+            water.Mn = Mn.Value;
+            water.Sr = Sr.Value;
+            water.Ba = Ba.Value;
+
+            // Anions
+            water.HCO3 = HCO3.Value;
+            water.SO4 = SO4.Value;
+            water.Cl = Cl.Value;
+            water.NO2 = NO2.Value;
+            water.NO3 = NO3.Value;
+            water.F = F.Value;
+            water.SiO2 = SiO2.Value;
+            water.PO4 = PO4.Value;
+
+            // Others
+            water.pH = pH.Value;
+            water.Temperature = Temperature.Value;
+            water.Oxidability = Oxidability.Value;
+            water.Turbidity = Turbidity.Value;
+            water.TSS = TSS.Value;
+            water.Odor = Odor.Value;
+            water.Colority = Colority.Value;
+            water.Taste = Taste.Value;
+
+            return water;
         }
     }
 }
