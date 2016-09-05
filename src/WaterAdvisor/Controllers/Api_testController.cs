@@ -16,12 +16,12 @@ namespace WaterAdvisor.Controllers
     [Produces("application/json")]
     //[Route("api/[controller]")]
     [Authorize]
-    public class ApiController : Controller
+    public class Api_testController : Controller
     {
         private readonly ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
 
-        public ApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public Api_testController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -36,8 +36,7 @@ namespace WaterAdvisor.Controllers
                 return NotFound();
             }
 
-            var homeViewModel = new HomeViewModel();
-            var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
 
             if (project == null)
             {
@@ -50,9 +49,7 @@ namespace WaterAdvisor.Controllers
                 return Unauthorized();
             }
 
-            LoadProject(homeViewModel, project);
-
-            return Json(homeViewModel, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include });
+            return Json(project, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include });
         }
 
         // POST: Api/Post
@@ -89,44 +86,9 @@ namespace WaterAdvisor.Controllers
             return this.CreatedAtAction("Get", new { }, true);
         }
 
-        // Helpers section
-
-        // Check if Project exists
         private bool ProjectExists(int id)
         {
             return _context.Project.Any(e => e.Id == id);
         }
-
-        // Load project
-        private void LoadProject(HomeViewModel model, Project project)
-        {
-            model.Id = project.Id;
-            model.ProjectComment = project.ProjectComment;
-            model.ProjectDate = project.ProjectDate;
-            model.ProjectName = project.ProjectName;
-            if (project.WaterIn == null) model.WaterIn = new WaterList(); else model.WaterIn.ImportWater(project.WaterIn);
-        }
-
-        // Save project
-        private async void SaveProject(HomeViewModel model, Project project)
-        {
-            project.Id = model.Id;
-            project.ProjectComment = model.ProjectComment;
-            project.ProjectDate = model.ProjectDate;
-            project.ProjectName = model.ProjectName;
-            project.WaterIn = model.WaterIn.ExportWater();
-
-            try
-            {
-                _context.Update(project);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
-        }
-
     }
 }

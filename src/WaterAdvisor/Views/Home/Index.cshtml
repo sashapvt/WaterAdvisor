@@ -341,7 +341,15 @@
 
 </div>
 
+<p>Id: <strong data-bind="text: Id"></strong></p>
+<p>ProjectName: <strong data-bind="text: ProjectName"></strong></p>
+<p>ProjectDate: <strong data-bind="text: ProjectDate"></strong></p>
+<p>ProjectComment: <strong data-bind="text: ProjectComment"></strong></p>
+
+<button id="buttonLoadProject">Завантажити проект (тест)</button>
+<button id="buttonSaveProject">Зберегти проект (тест)</button>
 
 @section Scripts {
+    <script src="~/js/app.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -5,7 +5,7 @@ GetData();
 
 function GetData() {
     $.ajax({
-        url: '/Api/Get/'+ Id,
+        url: '/Api_test/Get/'+ Id,
         cache: false, 
         success: function (data) {
             console.log('Get request done');
@@ -25,20 +25,19 @@ function GetData() {
 function PostData() {
     var SendData = ko.mapping.toJSON(AppViewModel);
     $.ajax({
-        url: '/Api/Post', type: 'post', data: SendData, contentType: 'application/json', success: function (data) {
+        url: '/Api_test/Post', type: 'post', data: SendData, contentType: 'application/json', success: function (data) {
             console.log('Post request result: ' + data);
             GetData();
         }
     });
 }
 
-$("#buttonLoadProject").click(function () {
+$("#button_from_server").click(function () {
     GetData();
 });
 
-$("#buttonSaveProject").click(function () {
+$("#button_to_server").click(function () {
     PostData();
-
 });
 
 $(':input').change(function () {

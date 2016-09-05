@@ -24,7 +24,7 @@ namespace WaterAdvisor.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(int? id)
+        public IActionResult Index(int? id)
         {
             if (id == null)
             {
@@ -39,19 +39,20 @@ namespace WaterAdvisor.Controllers
                 Response.Cookies.Append("lastProjectOpenedId",id.ToString());
 
                 var homeViewModel = new HomeViewModel();
-                var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == id);
-                if (project == null)
-                {
-                    return NotFound();
-                }
+                homeViewModel.WaterIn = new WaterList();
+                //var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == id);
+                //if (project == null)
+                //{
+                //    return NotFound();
+                //}
 
-                var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-                if (project.UserId != currentUserId)
-                {
-                    return Unauthorized();
-                }
+                //var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+                //if (project.UserId != currentUserId)
+                //{
+                //    return Unauthorized();
+                //}
 
-                LoadProject(homeViewModel, project);
+                //LoadProject(homeViewModel, project);
 
                 return View(homeViewModel);
             }
@@ -81,28 +82,6 @@ namespace WaterAdvisor.Controllers
             ViewBag.HttpCode = HttpCode;
             ViewBag.Message = message;
             return View();
-        }
-
-        // Helpers
-
-        // Load project
-        private void LoadProject(HomeViewModel model, Project project)
-        {
-            model.Id = project.Id;
-            model.ProjectComment = project.ProjectComment;
-            model.ProjectDate = project.ProjectDate;
-            model.ProjectName = project.ProjectName;
-            if (project.WaterIn == null) model.WaterIn = new WaterList(); else model.WaterIn.ImportWater(project.WaterIn);
-        }
-
-        // Save project
-        private void SaveProject(HomeViewModel model, Project project)
-        {
-            project.Id = model.Id;
-            project.ProjectComment = model.ProjectComment;
-            project.ProjectDate = model.ProjectDate;
-            project.ProjectName = model.ProjectName;
-            project.WaterIn = model.WaterIn.ExportWater();
         }
 
     }
