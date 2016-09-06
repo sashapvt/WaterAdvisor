@@ -10,7 +10,7 @@ function GetData() {
         success: function (data) {
             console.log('Get request done');
             console.log(data);
-            if (AppViewModel === null) {
+            if (AppViewModel == null) {
                 AppViewModel = ko.mapping.fromJS(data);
                 ko.applyBindings(AppViewModel);
             }
@@ -25,7 +25,7 @@ function GetData() {
 function PostData() {
     var SendData = ko.mapping.toJSON(AppViewModel);
     $.ajax({
-        url: '/Api/Post', type: 'post', data: SendData, contentType: 'application/json', success: function (data) {
+        url: '/Api/Post', type: 'post', data: SendData, contentType: 'application/json; charset=utf-8', success: function (data) {
             console.log('Post request result: ' + data);
             GetData();
         }

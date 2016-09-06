@@ -57,20 +57,28 @@ namespace WaterAdvisor.Controllers
 
         // POST: Api/Post
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Project project)
+        public async Task<IActionResult> Post([FromBody] HomeViewModel homeViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == homeViewModel.Id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
+            {
+                return Unauthorized();
+            }
+
             try
             {
-                var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-                if (project.UserId != currentUserId)
-                {
-                    return Unauthorized();
-                }
+                SaveProject(homeViewModel, project);
                 _context.Update(project);
                 await _context.SaveChangesAsync();
             }
@@ -104,28 +112,18 @@ namespace WaterAdvisor.Controllers
             model.ProjectComment = project.ProjectComment;
             model.ProjectDate = project.ProjectDate;
             model.ProjectName = project.ProjectName;
-            if (project.WaterIn == null) model.WaterIn = new WaterList(); else model.WaterIn.ImportWater(project.WaterIn);
+            model.WaterIn = new WaterList();
+            if (project.WaterIn != null) model.WaterIn.ImportWater(project.WaterIn);
         }
 
         // Save project
-        private async void SaveProject(HomeViewModel model, Project project)
+        private void SaveProject(HomeViewModel model, Project project)
         {
             project.Id = model.Id;
             project.ProjectComment = model.ProjectComment;
             project.ProjectDate = model.ProjectDate;
             project.ProjectName = model.ProjectName;
             project.WaterIn = model.WaterIn.ExportWater();
-
-            try
-            {
-                _context.Update(project);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
         }
 
     }

@@ -32,11 +32,11 @@
                             @Model.WaterIn.NH4.Name
                         </td>
                         <td>
-                            <input asp-for="@Model.WaterIn.NH4.Value" class="form-control input-sm" />
+                            <input asp-for="@Model.WaterIn.NH4.Value" class="form-control input-sm" data-bind="textInput: WaterIn.NH4.Value" />
                             <span asp-validation-for="@Model.WaterIn.NH4.Value" class="text-danger" />
                         </td>
                         <td>
-                            <input asp-for="@Model.WaterIn.NH4.ValueMEq" class="form-control input-sm" />
+                            <input asp-for="@Model.WaterIn.NH4.ValueMEq" class="form-control input-sm" data-bind="textInput: WaterIn.NH4.ValueMEq" />
                             <span asp-validation-for="@Model.WaterIn.NH4.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
@@ -342,9 +342,26 @@
 </div>
 
 <p>Id: <strong data-bind="text: Id"></strong></p>
-<p>ProjectName: <strong data-bind="text: ProjectName"></strong></p>
 <p>ProjectDate: <strong data-bind="text: ProjectDate"></strong></p>
-<p>ProjectComment: <strong data-bind="text: ProjectComment"></strong></p>
+
+<form>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label asp-for="ProjectName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ProjectName" class="form-control" data-bind="textInput: ProjectName" />
+                <span asp-validation-for="ProjectName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProjectComment" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ProjectComment" class="form-control" data-bind="textInput: ProjectComment" />
+                <span asp-validation-for="ProjectComment" class="text-danger" />
+            </div>
+        </div>
+    </div>
+</form>
 
 <button id="buttonLoadProject">Завантажити проект (тест)</button>
 <button id="buttonSaveProject">Зберегти проект (тест)</button>
