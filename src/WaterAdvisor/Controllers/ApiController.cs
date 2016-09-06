@@ -123,7 +123,8 @@ namespace WaterAdvisor.Controllers
             project.ProjectComment = model.ProjectComment;
             project.ProjectDate = model.ProjectDate;
             project.ProjectName = model.ProjectName;
-            project.WaterIn = model.WaterIn.ExportWater();
+            if (project.WaterIn == null) project.WaterIn = new Water();
+            model.WaterIn.ExportWater(project.WaterIn);
         }
 
     }

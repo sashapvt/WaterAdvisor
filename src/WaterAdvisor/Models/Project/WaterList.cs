@@ -123,10 +123,8 @@ namespace WaterAdvisor.Models.Project
         }
 
         // Export to Water model
-        public Water ExportWater()
+        public void ExportWater(Water water)
         {
-            var water = new Water();
-
             // Cations
             water.NH4 = NH4.Value;
             water.K = K.Value;
@@ -158,8 +156,6 @@ namespace WaterAdvisor.Models.Project
             water.Odor = Odor.Value;
             water.Colority = Colority.Value;
             water.Taste = Taste.Value;
-
-            return water;
         }
     }
 }

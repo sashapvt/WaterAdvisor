@@ -40,19 +40,6 @@ namespace WaterAdvisor.Controllers
 
                 var homeViewModel = new HomeViewModel();
                 homeViewModel.WaterIn = new WaterList();
-                //var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == id);
-                //if (project == null)
-                //{
-                //    return NotFound();
-                //}
-
-                //var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-                //if (project.UserId != currentUserId)
-                //{
-                //    return Unauthorized();
-                //}
-
-                //LoadProject(homeViewModel, project);
 
                 return View(homeViewModel);
             }
