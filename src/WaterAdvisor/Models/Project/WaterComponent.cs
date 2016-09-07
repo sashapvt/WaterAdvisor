@@ -10,21 +10,32 @@ namespace WaterAdvisor.Models.Project
     {
         public WaterComponent(string name, double mgToMEq, WaterComponentType type)
         {
-            Name = name;
+            _name = name;
             _mgToMEq = mgToMEq;
             _type = type;
             Value = 0;
-            ValueMEq = 0;
         }
+        private string _name;
         private double _mgToMEq;
         private WaterComponentType _type;
 
-        public string Name { get; private set; }
         public double Value { get; set; }
-        public double ValueMEq { get; set; }
 
-        public double MgToMEq() { return _mgToMEq; }
-        public WaterComponentType Type() { return _type; }
+        public double ValueMEq
+        {
+            get
+            {
+                return (_mgToMEq != 0) ? Math.Round(Value / _mgToMEq, 3) : 0;
+            }
+            set
+            {
+                if (_mgToMEq != 0) Value = Math.Round(value * _mgToMEq, 3);
+            }
+        }
+
+        public string GetName() { return _name; }
+        public double GetMgToMEq() { return _mgToMEq; }
+        public WaterComponentType GetComponentType() { return _type; }
     }
 
     public enum WaterComponentType { Cation, Anion, Other };
