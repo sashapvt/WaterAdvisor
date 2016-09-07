@@ -32,6 +32,11 @@ function PostData() {
     });
 }
 
+$("#buttonEditProject").click(function () {
+    GetData();
+});
+
+
 $("#buttonLoadProject").click(function () {
     GetData();
 });

@@ -24,7 +24,7 @@ namespace WaterAdvisor.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int? id)
+        public async Task<IActionResult> Index(int? id)
         {
             if (id == null)
             {
@@ -38,8 +38,22 @@ namespace WaterAdvisor.Controllers
                 if (Request.Cookies["lastProjectOpenedId"] != null) Response.Cookies.Delete("lastProjectOpenedId");
                 Response.Cookies.Append("lastProjectOpenedId",id.ToString());
 
+                var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
+
+                if (project == null)
+                {
+                    return NotFound();
+                }
+
+                var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+                if (project.UserId != currentUserId)
+                {
+                    return Unauthorized();
+                }
                 var homeViewModel = new HomeViewModel();
                 homeViewModel.WaterIn = new WaterList();
+                homeViewModel.Id = project.Id;
+                homeViewModel.ProjectName = project.ProjectName;
 
                 return View(homeViewModel);
             }

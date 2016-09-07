@@ -133,7 +133,7 @@ namespace WaterAdvisor.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home", id);
             }
             return View(project);
         }

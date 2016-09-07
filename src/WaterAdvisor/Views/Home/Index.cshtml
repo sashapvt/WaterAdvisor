@@ -1,6 +1,6 @@
 ﻿@model WaterAdvisor.Models.Project.HomeViewModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Проект: " + Model.ProjectName;
 }
 
 <h2>Аналіз води</h2>
@@ -338,31 +338,11 @@
             </table>
         </div>
     </form>
-
 </div>
 
-<p>Id: <strong data-bind="text: Id"></strong></p>
-<p>ProjectDate: <strong data-bind="text: ProjectDate"></strong></p>
+<button id="buttonEditProject" onClick="location.href='/Project/Edit/@Model.Id'" class="btn btn-default">Налаштування проекту</button>
 
-<form>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label asp-for="ProjectName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProjectName" class="form-control" data-bind="textInput: ProjectName" />
-                <span asp-validation-for="ProjectName" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProjectComment" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProjectComment" class="form-control" data-bind="textInput: ProjectComment" />
-                <span asp-validation-for="ProjectComment" class="text-danger" />
-            </div>
-        </div>
-    </div>
-</form>
-
+<hr />
 <button id="buttonLoadProject">Завантажити проект (тест)</button>
 <button id="buttonSaveProject">Зберегти проект (тест)</button>
 
