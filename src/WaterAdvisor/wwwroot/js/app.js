@@ -9,7 +9,7 @@ function GetData() {
         cache: false, 
         success: function (data) {
             console.log('Get request done');
-            console.log(data);
+            //console.log(data);
             if (AppViewModel == null) {
                 AppViewModel = ko.mapping.fromJS(data);
                 ko.applyBindings(AppViewModel);
@@ -26,16 +26,20 @@ function PostData() {
     var SendData = ko.mapping.toJSON(AppViewModel);
     $.ajax({
         url: '/Api/Post', type: 'post', data: SendData, contentType: 'application/json; charset=utf-8', success: function (data) {
-            console.log('Post request result: ' + data);
+            console.log('Post request done');
             GetData();
         }
     });
 }
 
-$("#buttonEditProject").click(function () {
-    GetData();
-});
-
+function PostDataPartial(changedValueObject) {
+    $.ajax({
+        url: '/Api/PostPartial', type: 'post', data: JSON.stringify(changedValueObject), contentType: 'application/json; charset=utf-8', success: function (data) {
+            console.log('Post request done');
+            GetData();
+        }
+    });
+}
 
 $("#buttonLoadProject").click(function () {
     GetData();
@@ -46,6 +50,10 @@ $("#buttonSaveProject").click(function () {
 
 });
 
-$(':input').change(function () {
-    PostData();
+$(':input').change(function (eventObject) {
+    var changedValueObject = new Object();
+    changedValueObject.ProjectId = Id;
+    changedValueObject.Name = eventObject.target.name;
+    changedValueObject.Value = eventObject.target.value;
+    PostDataPartial(changedValueObject);
 });

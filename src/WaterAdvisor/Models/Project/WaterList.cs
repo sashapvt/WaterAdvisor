@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace WaterAdvisor.Models.Project
@@ -44,6 +45,13 @@ namespace WaterAdvisor.Models.Project
             //Lists
             _cations = new List<WaterComponent> { NH4, K, Na, Ca, Mg, Fe2, Fe3, Mn, Sr, Ba };
             _anions = new List<WaterComponent> { HCO3, SO4, Cl, NO2, NO3, F, SiO2, PO4 };
+        }
+
+        // Indexer
+        public object this[string propertyName]
+        {
+            get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
+            set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
 
         // Private lists

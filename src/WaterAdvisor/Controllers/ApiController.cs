@@ -97,7 +97,57 @@ namespace WaterAdvisor.Controllers
             return this.CreatedAtAction("Get", new { }, true);
         }
 
+        // POST: Api/PostPartial
+        [HttpPost]
+        public async Task<IActionResult> PostPartial([FromBody] ChangedValueObject changedValueObject)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == changedValueObject.ProjectId);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            if (project.UserId != currentUserId)
+            {
+                return Unauthorized();
+            }
+
+            try
+            {
+                SaveProjectPartial(changedValueObject, project);
+                _context.Update(project);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjectExists(project.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return this.CreatedAtAction("Get", new { }, true);
+        }
+
         // Helpers section
+
+        // Class ChangedValueObject
+        public class ChangedValueObject
+        {
+            public int ProjectId { get; set; }
+            public string Name { get; set; }
+            public double Value { get; set; }
+        }
 
         // Check if Project exists
         private bool ProjectExists(int id)
@@ -119,12 +169,28 @@ namespace WaterAdvisor.Controllers
         // Save project
         private void SaveProject(HomeViewModel model, Project project)
         {
-            project.Id = model.Id;
+            //project.Id = model.Id;
             project.ProjectComment = model.ProjectComment;
             project.ProjectDate = model.ProjectDate;
             project.ProjectName = model.ProjectName;
             if (project.WaterIn == null) project.WaterIn = new Water();
             model.WaterIn.ExportWater(project.WaterIn);
+        }
+
+        // Save project partial
+        private void SaveProjectPartial(ChangedValueObject changedValueObject, Project project)
+        {
+            if (project.WaterIn == null) project.WaterIn = new Water();
+            var waterIn = new WaterList();
+            waterIn.ImportWater(project.WaterIn);
+
+            // Parse value like this: WaterIn.Na.Value
+            string[] NameSplitted = changedValueObject.Name.Split("."[0]);
+            if (NameSplitted.Length == 3 && NameSplitted[0] == "WaterIn")
+            {
+                ((WaterComponent) waterIn[NameSplitted[1]])[NameSplitted[2]] = changedValueObject.Value;
+            }
+            waterIn.ExportWater(project.WaterIn);
         }
 
     }
