@@ -162,7 +162,6 @@ namespace WaterAdvisor.Controllers
             model.ProjectComment = project.ProjectComment;
             model.ProjectDate = project.ProjectDate;
             model.ProjectName = project.ProjectName;
-            model.WaterIn = new WaterList();
             if (project.WaterIn != null) model.WaterIn.ImportWater(project.WaterIn);
         }
 

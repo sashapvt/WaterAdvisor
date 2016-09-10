@@ -8,7 +8,15 @@ namespace WaterAdvisor.Models.Project
 {
     public class HomeViewModel : ProjectBase
     {
+        public HomeViewModel()
+        {
+            WaterIn = new WaterList();
+            Calc = new Calc(WaterIn);
+        }
         // Input water data
         public WaterList WaterIn { get; set; }
+
+        // Calculation
+        public Calc Calc { get; set; }
     }
 }

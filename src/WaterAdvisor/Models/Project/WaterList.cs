@@ -94,6 +94,11 @@ namespace WaterAdvisor.Models.Project
         public List<WaterComponent> Cations() { return _cations; }
         public List<WaterComponent> Anions() { return _anions; }
 
+        // Callculated properties
+        public double CationsMEq => Cations().Sum(x => x.ValueMEq);
+        public double AnionsMEq => Anions().Sum(x => x.ValueMEq);
+        public double TDS => Cations().Sum(x => x.Value) + Anions().Sum(x => x.Value);
+
         // Import to Water model
         public void ImportWater(Water water)
         {

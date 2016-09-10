@@ -6,7 +6,7 @@
 <h2>Аналіз води</h2>
 
 <div class="col-md-12">
-    <form asp-action="Index">
+    <form>
         <div class="form-horizontal col-md-4">
             <h4>Катіони</h4>
 
@@ -157,12 +157,22 @@
                             <span asp-validation-for="@Model.WaterIn.Ba.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Сума катіонів
+                        </td>
+                        <td data-bind="text: WaterIn.CationsMEq">
+                        </td>
+                        <td>
+                            мг-екв/л
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </form>
 
-    <form asp-action="Index">
+    <form>
         <div class="form-horizontal col-md-4">
             <h4>Аніони</h4>
 
@@ -286,12 +296,30 @@
                             <span asp-validation-for="@Model.WaterIn.PO4.ValueMEq" class="text-danger" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Сума аніонів
+                        </td>
+                        <td data-bind="text: WaterIn.AnionsMEq"></td>
+                        <td>
+                            мг-екв/л
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Загальний солевміст
+                        </td>
+                        <td data-bind="text: WaterIn.TDS"></td>
+                        <td>
+                            мг/л
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </form>
 
-    <form asp-action="Index">
+    <form>
         <div class="form-horizontal col-md-4">
             <h4>Інше</h4>
 
@@ -336,15 +364,49 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h4>Індекси</h4>
+            <table class="table" width="100">
+                <thead>
+                    <tr>
+                        <th class="col-md-4">
+                            Назва
+                        </th>
+                        <th class="col-md-2">
+                            Значення
+                        </th>
+                        <th class="col-md-2">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            CO2
+                        </td>
+                        <td data-bind="text: Calc.CO2">
+                        </td>
+                        <td>
+                            мг/л
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            LSI
+                        </td>
+                        <td data-bind="text: Calc.LSI"></td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
     </form>
 </div>
 
 <button id="buttonEditProject" onClick="location.href='/Project/Edit/@Model.Id'" class="btn btn-default">Налаштування проекту</button>
-
-<hr />
-<button id="buttonLoadProject">Завантажити проект (тест)</button>
-<button id="buttonSaveProject">Зберегти проект (тест)</button>
 
 @section Scripts {
     <script src="~/js/app.js"></script>

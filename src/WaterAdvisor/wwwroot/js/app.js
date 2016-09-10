@@ -41,15 +41,6 @@ function PostDataPartial(changedValueObject) {
     });
 }
 
-$("#buttonLoadProject").click(function () {
-    GetData();
-});
-
-$("#buttonSaveProject").click(function () {
-    PostData();
-
-});
-
 $(':input').change(function (eventObject) {
     var changedValueObject = new Object();
     changedValueObject.ProjectId = Id;
