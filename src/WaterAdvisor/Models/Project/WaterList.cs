@@ -11,36 +11,36 @@ namespace WaterAdvisor.Models.Project
         public WaterList()
         {
             // Cations
-            NH4 = new WaterComponent("Аммоній", 18.00, WaterComponentType.Cation);
-            K = new WaterComponent("Калій", 39.10, WaterComponentType.Cation);
-            Na = new WaterComponent("Натрій", 23.00, WaterComponentType.Cation);
-            Ca = new WaterComponent("Кальцій", 20.04, WaterComponentType.Cation);
-            Mg = new WaterComponent("Магній", 12.15, WaterComponentType.Cation);
-            Fe2 = new WaterComponent("Залізо 2+", 27.93, WaterComponentType.Cation);
-            Fe3 = new WaterComponent("Залізо 3+", 18.62, WaterComponentType.Cation);
-            Mn = new WaterComponent("Марганець", 54.94, WaterComponentType.Cation);
-            Sr = new WaterComponent("Стронцій", 43.81, WaterComponentType.Cation);
-            Ba = new WaterComponent("Барій", 68.66, WaterComponentType.Cation);
+            NH4 = new WaterComponent("Аммоній", WaterComponentType.Cation, 18.00, 1);
+            K = new WaterComponent("Калій", WaterComponentType.Cation, 39.10, 1);
+            Na = new WaterComponent("Натрій", WaterComponentType.Cation, 23.00, 1);
+            Ca = new WaterComponent("Кальцій", WaterComponentType.Cation, 20.04, 2);
+            Mg = new WaterComponent("Магній", WaterComponentType.Cation, 12.15, 2);
+            Fe2 = new WaterComponent("Залізо 2+", WaterComponentType.Cation, 27.93, 2);
+            Fe3 = new WaterComponent("Залізо 3+", WaterComponentType.Cation, 18.62, 3);
+            Mn = new WaterComponent("Марганець", WaterComponentType.Cation, 27.47, 2);
+            Sr = new WaterComponent("Стронцій", WaterComponentType.Cation, 43.81, 2);
+            Ba = new WaterComponent("Барій", WaterComponentType.Cation, 68.66, 2);
 
             // Anions
-            HCO3 = new WaterComponent("Гідрокарбонати", 61.00, WaterComponentType.Anion);
-            SO4 = new WaterComponent("Сульфати", 48.00, WaterComponentType.Anion);
-            Cl = new WaterComponent("Хлориди", 35.45, WaterComponentType.Anion);
-            NO2 = new WaterComponent("Нітрити", 46.00, WaterComponentType.Anion);
-            NO3 = new WaterComponent("Нітрати", 62.00, WaterComponentType.Anion);
-            F = new WaterComponent("Фториди", 19.00, WaterComponentType.Anion);
-            SiO2 = new WaterComponent("Силікати", 0, WaterComponentType.Anion);
-            PO4 = new WaterComponent("Фосфати", 31.66, WaterComponentType.Anion);
+            HCO3 = new WaterComponent("Гідрокарбонати", WaterComponentType.Anion, 61.00, 1);
+            SO4 = new WaterComponent("Сульфати", WaterComponentType.Anion, 48.00, 2);
+            Cl = new WaterComponent("Хлориди", WaterComponentType.Anion, 35.45, 1);
+            NO2 = new WaterComponent("Нітрити", WaterComponentType.Anion, 46.00, 1);
+            NO3 = new WaterComponent("Нітрати", WaterComponentType.Anion, 62.00, 1);
+            F = new WaterComponent("Фториди", WaterComponentType.Anion, 19.00, 1);
+            SiO2 = new WaterComponent("Силікати", WaterComponentType.Anion, 0, 4);
+            PO4 = new WaterComponent("Фосфати", WaterComponentType.Anion, 31.66, 3);
 
             // Others
-            pH = new WaterComponent("pH", 0, WaterComponentType.Other);
-            Temperature = new WaterComponent("Температура", 0, WaterComponentType.Other);
-            Oxidability = new WaterComponent("Окисність", 0, WaterComponentType.Other);
-            Turbidity = new WaterComponent("Мутність", 0, WaterComponentType.Other);
-            TSS = new WaterComponent("Зважені речовини", 0, WaterComponentType.Other);
-            Odor = new WaterComponent("Запах", 0, WaterComponentType.Other);
-            Colority = new WaterComponent("Кольоровість", 0, WaterComponentType.Other);
-            Taste = new WaterComponent("Присмак", 0, WaterComponentType.Other);
+            pH = new WaterComponent("pH", WaterComponentType.Other);
+            Temperature = new WaterComponent("Температура", WaterComponentType.Other);
+            Oxidability = new WaterComponent("Окисність", WaterComponentType.Other);
+            Turbidity = new WaterComponent("Мутність", WaterComponentType.Other);
+            TSS = new WaterComponent("Зважені речовини", WaterComponentType.Other);
+            Odor = new WaterComponent("Запах", WaterComponentType.Other);
+            Colority = new WaterComponent("Кольоровість", WaterComponentType.Other);
+            Taste = new WaterComponent("Присмак", WaterComponentType.Other);
 
             //Lists
             _cations = new List<WaterComponent> { NH4, K, Na, Ca, Mg, Fe2, Fe3, Mn, Sr, Ba };
@@ -95,9 +95,10 @@ namespace WaterAdvisor.Models.Project
         public List<WaterComponent> Anions() { return _anions; }
 
         // Callculated properties
-        public double CationsMEq => Cations().Sum(x => x.ValueMEq);
-        public double AnionsMEq => Anions().Sum(x => x.ValueMEq);
-        public double TDS => Cations().Sum(x => x.Value) + Anions().Sum(x => x.Value);
+        public double SumCationsMEq => Math.Round(Cations().Sum(x => x.ValueMEq), 2);
+        public double SumAnionsMEq => Math.Round(Anions().Sum(x => x.ValueMEq), 2);
+        public double SumIonsBalance => Math.Round(SumCationsMEq - SumAnionsMEq, 2);
+        public double TDS => Math.Round(Cations().Sum(x => x.Value) + Anions().Sum(x => x.Value), 2);
 
         // Import to Water model
         public void ImportWater(Water water)

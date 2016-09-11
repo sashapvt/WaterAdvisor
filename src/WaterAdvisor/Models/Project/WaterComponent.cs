@@ -9,11 +9,12 @@ namespace WaterAdvisor.Models.Project
 {
     public class WaterComponent
     {
-        public WaterComponent(string name, double mgToMEq, WaterComponentType type)
+        public WaterComponent(string name, WaterComponentType type, double mgToMEq = 0, int ionCharge = 0)
         {
             _name = name;
-            _mgToMEq = mgToMEq;
             _type = type;
+            _mgToMEq = mgToMEq;
+            _ionCharge = ionCharge;
             Value = 0;
         }
 
@@ -26,6 +27,7 @@ namespace WaterAdvisor.Models.Project
 
         private string _name;
         private double _mgToMEq;
+        private int _ionCharge;
         private WaterComponentType _type;
 
         public double Value { get; set; }
@@ -44,6 +46,7 @@ namespace WaterAdvisor.Models.Project
 
         public string GetName() { return _name; }
         public double GetMgToMEq() { return _mgToMEq; }
+        public int GetIonCharge() { return _ionCharge; }
         public WaterComponentType GetComponentType() { return _type; }
     }
 

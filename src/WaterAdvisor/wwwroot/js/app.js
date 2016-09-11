@@ -48,3 +48,19 @@ $(':input').change(function (eventObject) {
     changedValueObject.Value = eventObject.target.value;
     PostDataPartial(changedValueObject);
 });
+
+$('button#buttonBalanceAnalysis').click(function () {
+    var SumIonsBalance = AppViewModel.WaterIn.SumIonsBalance();
+    var Na = AppViewModel.WaterIn.Na.ValueMEq();
+    var Cl = AppViewModel.WaterIn.Cl.ValueMEq();
+    if (SumIonsBalance != 0) {
+        if (SumIonsBalance > 0) {
+            AppViewModel.WaterIn.Cl.ValueMEq(Cl + SumIonsBalance);
+            $("input#WaterIn_Cl_ValueMEq").trigger("change");
+        }
+        else {
+            AppViewModel.WaterIn.Na.ValueMEq(Na + Math.abs(SumIonsBalance));
+            $("input#WaterIn_Na_ValueMEq").trigger("change");
+        }
+    }
+});

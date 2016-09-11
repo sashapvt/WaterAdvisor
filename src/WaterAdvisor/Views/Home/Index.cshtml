@@ -6,7 +6,6 @@
 <h2>Аналіз води</h2>
 
 <div class="col-md-12">
-    <form>
         <div class="form-horizontal col-md-4">
             <h4>Катіони</h4>
 
@@ -161,7 +160,7 @@
                         <td>
                             Сума катіонів
                         </td>
-                        <td data-bind="text: WaterIn.CationsMEq">
+                        <td data-bind="text: WaterIn.SumCationsMEq">
                         </td>
                         <td>
                             мг-екв/л
@@ -170,9 +169,7 @@
                 </tbody>
             </table>
         </div>
-    </form>
 
-    <form>
         <div class="form-horizontal col-md-4">
             <h4>Аніони</h4>
 
@@ -300,7 +297,16 @@
                         <td>
                             Сума аніонів
                         </td>
-                        <td data-bind="text: WaterIn.AnionsMEq"></td>
+                        <td data-bind="text: WaterIn.SumAnionsMEq"></td>
+                        <td>
+                            мг-екв/л
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Баланс іонів
+                        </td>
+                        <td data-bind="text: WaterIn.SumIonsBalance"></td>
                         <td>
                             мг-екв/л
                         </td>
@@ -316,10 +322,9 @@
                     </tr>
                 </tbody>
             </table>
+            <button id="buttonBalanceAnalysis" class="btn btn-default" data-bind="enable: (WaterIn.SumIonsBalance() != 0)">Балансувати аналіз (натрій/хлориди)</button>
         </div>
-    </form>
 
-    <form>
         <div class="form-horizontal col-md-4">
             <h4>Інше</h4>
 
@@ -382,6 +387,15 @@
                 <tbody>
                     <tr>
                         <td>
+                            IS
+                        </td>
+                        <td data-bind="text: Calc.IS"></td>
+                        <td>
+                            моль/л
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             CO2
                         </td>
                         <td data-bind="text: Calc.CO2">
@@ -395,15 +409,41 @@
                             LSI
                         </td>
                         <td data-bind="text: Calc.LSI"></td>
-                        <td>
-                            
+                        <td>                            
                         </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            S&DSI
+                        </td>
+                        <td data-bind="text: Calc.StDI"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            IP CaSO4
+                        </td>
+                        <td data-bind="text: Calc.IP_CaSO4"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            IP BaSO4
+                        </td>
+                        <td data-bind="text: Calc.IP_BaSO4"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            IP SrSO4
+                        </td>
+                        <td data-bind="text: Calc.IP_SrSO4"></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
-    </form>
 </div>
 
 <button id="buttonEditProject" onClick="location.href='/Project/Edit/@Model.Id'" class="btn btn-default">Налаштування проекту</button>
