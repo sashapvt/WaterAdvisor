@@ -3,7 +3,7 @@
     ViewData["Title"] = "Проект: " + Model.ProjectName;
 }
 
-<h2>Аналіз води</h2>
+@*<h2>Аналіз води</h2>*@
 
 <div class="col-md-12">
         <div class="form-horizontal col-md-4">
@@ -304,7 +304,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Баланс іонів
+                            Баланс іонів&nbsp;<button id="buttonBalanceAnalysis" class="btn btn-sm" title="Провести автоматичне балансування аналізу" data-bind="visible: (WaterIn.SumIonsBalance() != 0), text: (WaterIn.SumIonsBalance() > 0) ? '+Cl': '+Na'"></button>
                         </td>
                         <td data-bind="text: WaterIn.SumIonsBalance"></td>
                         <td>
@@ -320,29 +320,6 @@
                             мг/л
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <button id="buttonBalanceAnalysis" class="btn btn-default" data-bind="enable: (WaterIn.SumIonsBalance() != 0)">Балансувати аналіз (натрій/хлориди)</button>
-        </div>
-
-        <div class="form-horizontal col-md-4">
-            <h4>Інше</h4>
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <table class="table" width="100">
-                <thead>
-                    <tr>
-                        <th class="col-md-4">
-                            Назва
-                        </th>
-                        <th class="col-md-2">
-                            Значення
-                        </th>
-                        <th class="col-md-2">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
                     <tr>
                         <td>
                             @Model.WaterIn.pH.GetName()
@@ -369,7 +346,9 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
 
+        <div class="form-horizontal col-md-4">
             <h4>Індекси</h4>
             <table class="table" width="100">
                 <thead>
@@ -439,6 +418,81 @@
                         </td>
                         <td data-bind="text: Calc.IP_SrSO4"></td>
                         <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Редагування</h4>
+            <table class="table" width="100">
+                <thead>
+                    <tr>
+                        <th class="col-md-4">
+                            Назва
+                        </th>
+                        <th class="col-md-2">
+                            Значення
+                        </th>
+                        <th class="col-md-2">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Рекавері
+                        </td>
+                        <td>
+                            <input asp-for="@Model.RecoveryRO" class="form-control input-sm" data-bind="textInput: RecoveryRO" />
+                            <span asp-validation-for="@Model.RecoveryRO" class="text-danger" />
+                        </td>
+                        <td>
+                            %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Коригувати рН
+                        </td>
+                        <td colspan="2">
+                            <select name="phCorrection" id="phCorrection" class="form-control input-sm" data-bind="selectedOptions: phCorrection">
+                                <option value="0">Ні</option>
+                                <option value="1">HCl</option>
+                                <option value="2">H2SO4</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr data-bind="visible: (AppViewModel.pHCorrection() != 0)">
+                        <td>
+                            Скоригований рН
+                        </td>
+                        <td>
+                            <input asp-for="@Model.pHCorrected" class="form-control input-sm" data-bind="textInput: pHCorrected" />
+                            <span asp-validation-for="@Model.pHCorrected" class="text-danger" />
+                        </td>
+                        <td>
+                            од.
+                        </td>
+                    </tr>
+                    <tr data-bind="visible: (AppViewModel.pHCorrection() != 0)">
+                        <td>
+                            Доза кислоти
+                        </td>
+                        <td>
+                            <input asp-for="@Model.pHCorrectionAcidDose" class="form-control input-sm" data-bind="textInput: pHCorrectionAcidDose" />
+                            <span asp-validation-for="@Model.pHCorrectionAcidDose" class="text-danger" />
+                        </td>
+                        <td>
+                            мг/л
+                        </td>
+                    </tr>
+                    <tr data-bind="visible: (AppViewModel.pHCorrection() != 0)">
+                        <td>
+                            Скоригований солевміст
+                        </td>
+                        <td></td>
+                        <td>
+                            од.
+                        </td>
                     </tr>
                 </tbody>
             </table>
