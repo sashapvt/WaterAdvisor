@@ -54,6 +54,9 @@ namespace WaterAdvisor.Controllers
                 homeViewModel.Id = project.Id;
                 homeViewModel.ProjectName = project.ProjectName;
 
+                ViewBag.ProjectId = project.Id;
+                ViewBag.ProjectName = project.ProjectName;
+
                 return View(homeViewModel);
             }
         }
