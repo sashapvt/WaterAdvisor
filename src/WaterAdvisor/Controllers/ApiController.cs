@@ -162,16 +162,23 @@ namespace WaterAdvisor.Controllers
             model.ProjectComment = project.ProjectComment;
             model.ProjectDate = project.ProjectDate;
             model.ProjectName = project.ProjectName;
+            //model.RecoveryRO = project.RecoveryRO;
+            //model.pHCorrected = project.pHCorrected;
+            //model.pHCorrection = project.pHCorrection;
+            //model.pHCorrectionAcidDose = project.pHCorrectionAcidDose;
             if (project.WaterIn != null) model.WaterIn.ImportWater(project.WaterIn);
         }
 
         // Save project
         private void SaveProject(HomeViewModel model, Project project)
         {
-            //project.Id = model.Id;
             project.ProjectComment = model.ProjectComment;
             project.ProjectDate = model.ProjectDate;
             project.ProjectName = model.ProjectName;
+            //project.RecoveryRO = model.RecoveryRO;
+            //project.pHCorrected = model.pHCorrected;
+            //project.pHCorrection = (ProjectBase.EnumpHCorrection) model.pHCorrection;
+            //project.pHCorrectionAcidDose = model.pHCorrectionAcidDose;
             if (project.WaterIn == null) project.WaterIn = new Water();
             model.WaterIn.ExportWater(project.WaterIn);
         }
@@ -179,17 +186,26 @@ namespace WaterAdvisor.Controllers
         // Save project partial
         private void SaveProjectPartial(ChangedValueObject changedValueObject, Project project)
         {
-            if (project.WaterIn == null) project.WaterIn = new Water();
-            var waterIn = new WaterList();
-            waterIn.ImportWater(project.WaterIn);
-
-            // Parse value like this: WaterIn.Na.Value
-            string[] NameSplitted = changedValueObject.Name.Split("."[0]);
-            if (NameSplitted.Length == 3 && NameSplitted[0] == "WaterIn")
+            if (changedValueObject.Name.Contains("WaterIn."))
             {
-                ((WaterComponent) waterIn[NameSplitted[1]])[NameSplitted[2]] = changedValueObject.Value;
+                // Proceed WaterIn object
+                if (project.WaterIn == null) project.WaterIn = new Water();
+                var waterIn = new WaterList();
+                waterIn.ImportWater(project.WaterIn);
+
+                // Parse value like this: WaterIn.Na.Value
+                string[] NameSplitted = changedValueObject.Name.Split("."[0]);
+                if (NameSplitted.Length == 3 && NameSplitted[0] == "WaterIn")
+                {
+                    ((WaterComponent)waterIn[NameSplitted[1]])[NameSplitted[2]] = changedValueObject.Value;
+                }
+                waterIn.ExportWater(project.WaterIn);
             }
-            waterIn.ExportWater(project.WaterIn);
+            else
+            {
+                //Proceed other values
+                //project[changedValueObject.Name] = changedValueObject.Value;
+            }
         }
 
     }

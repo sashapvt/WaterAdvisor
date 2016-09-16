@@ -185,10 +185,18 @@ namespace WaterAdvisor.Data.Migrations
                     b.Property<string>("ProjectName")
                         .HasAnnotation("MaxLength", 100);
 
+                    b.Property<double>("RecoveryRO");
+
                     b.Property<string>("UserId")
                         .HasAnnotation("MaxLength", 450);
 
                     b.Property<int?>("WaterInId");
+
+                    b.Property<double>("pHCorrected");
+
+                    b.Property<int>("pHCorrection");
+
+                    b.Property<double>("pHCorrectionAcidDose");
 
                     b.HasKey("Id");
 

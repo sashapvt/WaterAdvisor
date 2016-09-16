@@ -22,5 +22,19 @@ namespace WaterAdvisor.Models.Project
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ProjectDate { get; set; }
+
+        // Project correction data
+        //[Display(Name = "Рекавері")]
+        //public double RecoveryRO { get; set; } // RO recovery in % for concentrate parameters calculation
+        //[Display(Name = "Коригувати рН")]
+        //public EnumpHCorrection pHCorrection { get; set; } // 0 - none, 1 - HCl, 2 - H2SO4
+        //[Display(Name = "Скоригований рН")]
+        //public double pHCorrected { get; set; } // Desired pH
+        //[Display(Name = "Доза кислоти")]
+        //public double pHCorrectionAcidDose { get; set; } // Acid dose for pH correction, mg/l
+
+        //// Enum for determine pHCorrection
+        //public enum EnumpHCorrection : int { None, HCl, H2SO4 }; // 0 - none, 1 - HCl, 2 - H2SO4
+
     }
 }
