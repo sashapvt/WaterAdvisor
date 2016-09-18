@@ -162,10 +162,10 @@ namespace WaterAdvisor.Controllers
             model.ProjectComment = project.ProjectComment;
             model.ProjectDate = project.ProjectDate;
             model.ProjectName = project.ProjectName;
-            //model.RecoveryRO = project.RecoveryRO;
-            //model.pHCorrected = project.pHCorrected;
-            //model.pHCorrection = project.pHCorrection;
-            //model.pHCorrectionAcidDose = project.pHCorrectionAcidDose;
+            model.RecoveryRO = project.RecoveryRO;
+            model.pHCorrected = project.pHCorrected;
+            model.pHCorrection = project.pHCorrection;
+            model.pHCorrectionAcidDose = project.pHCorrectionAcidDose;
             if (project.WaterIn != null) model.WaterIn.ImportWater(project.WaterIn);
         }
 
@@ -175,10 +175,10 @@ namespace WaterAdvisor.Controllers
             project.ProjectComment = model.ProjectComment;
             project.ProjectDate = model.ProjectDate;
             project.ProjectName = model.ProjectName;
-            //project.RecoveryRO = model.RecoveryRO;
-            //project.pHCorrected = model.pHCorrected;
-            //project.pHCorrection = (ProjectBase.EnumpHCorrection) model.pHCorrection;
-            //project.pHCorrectionAcidDose = model.pHCorrectionAcidDose;
+            project.RecoveryRO = model.RecoveryRO;
+            project.pHCorrected = model.pHCorrected;
+            project.pHCorrection = (ProjectBase.EnumpHCorrection) model.pHCorrection;
+            project.pHCorrectionAcidDose = model.pHCorrectionAcidDose;
             if (project.WaterIn == null) project.WaterIn = new Water();
             model.WaterIn.ExportWater(project.WaterIn);
         }
@@ -204,7 +204,21 @@ namespace WaterAdvisor.Controllers
             else
             {
                 //Proceed other values
-                //project[changedValueObject.Name] = changedValueObject.Value;
+                switch (changedValueObject.Name)
+                {
+                    case "phCorrection":
+                        project.pHCorrection = (ProjectBase.EnumpHCorrection) Convert.ToInt32(changedValueObject.Value);
+                        break;
+                    case "pHCorrected":
+                        project.pHCorrected = changedValueObject.Value;
+                        break;
+                    case "pHCorrectionAcidDose":
+                        project.pHCorrectionAcidDose = changedValueObject.Value;
+                        break;
+                    case "RecoveryRO":
+                        project.RecoveryRO = changedValueObject.Value;
+                        break;
+                }
             }
         }
 

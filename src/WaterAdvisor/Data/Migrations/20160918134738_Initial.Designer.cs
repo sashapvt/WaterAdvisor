@@ -8,7 +8,7 @@ using WaterAdvisor.Data;
 namespace WaterAdvisor.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160831131706_Initial")]
+    [Migration("20160918134738_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,10 +186,18 @@ namespace WaterAdvisor.Data.Migrations
                     b.Property<string>("ProjectName")
                         .HasAnnotation("MaxLength", 100);
 
+                    b.Property<double>("RecoveryRO");
+
                     b.Property<string>("UserId")
                         .HasAnnotation("MaxLength", 450);
 
                     b.Property<int?>("WaterInId");
+
+                    b.Property<double>("pHCorrected");
+
+                    b.Property<int>("pHCorrection");
+
+                    b.Property<double>("pHCorrectionAcidDose");
 
                     b.HasKey("Id");
 

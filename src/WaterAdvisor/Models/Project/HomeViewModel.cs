@@ -10,10 +10,10 @@ namespace WaterAdvisor.Models.Project
     {
         public HomeViewModel()
         {
-            //RecoveryRO = 75;
-            //pHCorrection = (int) EnumpHCorrection.None;
-            //pHCorrected = 0;
-            //pHCorrectionAcidDose = 0;
+            RecoveryRO = 75;
+            pHCorrection = (int)EnumpHCorrection.None;
+            pHCorrected = 0;
+            pHCorrectionAcidDose = 0;
             WaterIn = new WaterList();
             Calc = new Calc(WaterIn);
         }

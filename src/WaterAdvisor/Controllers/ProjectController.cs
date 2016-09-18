@@ -30,7 +30,8 @@ namespace WaterAdvisor.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            return View( await _context.Project.Where(Project => Project.UserId == currentUserId).ToListAsync());
+            var projects = await _context.Project.Where(Project => Project.UserId == currentUserId).ToListAsync();
+            return View(projects);
         }
 
         // GET: Project/Details/5
