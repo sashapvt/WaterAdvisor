@@ -5,11 +5,10 @@ GetData();
 
 function GetData() {
     $.ajax({
-        url: '/Api/Get/'+ Id,
-        cache: false, 
+        url: '/Api/Get/' + Id,
+        cache: false,
         success: function (data) {
             console.log('Get request done');
-            //console.log(data);
             if (AppViewModel == null) {
                 AppViewModel = ko.mapping.fromJS(data);
                 ko.applyBindings(AppViewModel);
@@ -46,6 +45,7 @@ $(':input').change(function (eventObject) {
     changedValueObject.ProjectId = Id;
     changedValueObject.Name = eventObject.target.name;
     changedValueObject.Value = eventObject.target.value;
+    if (changedValueObject.Name == "pHCorrection" && changedValueObject.Value == AppViewModel.pHCorrection()) return;
     PostDataPartial(changedValueObject);
 });
 

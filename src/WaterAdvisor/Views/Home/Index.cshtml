@@ -454,7 +454,7 @@
                             Коригувати рН
                         </td>
                         <td colspan="2">
-                            <select name="phCorrection" id="phCorrection" class="form-control input-sm" data-bind="selectedOptions: phCorrection">
+                            <select asp-for="@Model.pHCorrection" class="form-control input-sm" data-bind="value: pHCorrection">
                                 <option value="0">Ні</option>
                                 <option value="1">HCl</option>
                                 <option value="2">H2SO4</option>

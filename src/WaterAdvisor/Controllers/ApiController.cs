@@ -144,9 +144,9 @@ namespace WaterAdvisor.Controllers
         // Class ChangedValueObject
         public class ChangedValueObject
         {
-            public int ProjectId { get; set; }
-            public string Name { get; set; }
-            public double Value { get; set; }
+            public int ProjectId;
+            public string Name;
+            public double Value;
         }
 
         // Check if Project exists
@@ -206,7 +206,7 @@ namespace WaterAdvisor.Controllers
                 //Proceed other values
                 switch (changedValueObject.Name)
                 {
-                    case "phCorrection":
+                    case "pHCorrection":
                         project.pHCorrection = (ProjectBase.EnumpHCorrection) Convert.ToInt32(changedValueObject.Value);
                         break;
                     case "pHCorrected":
