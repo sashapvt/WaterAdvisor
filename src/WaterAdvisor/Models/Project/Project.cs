@@ -9,6 +9,13 @@ namespace WaterAdvisor.Models.Project
 {
     public class Project : ProjectBase
     {
+        public Project()
+        {
+            RecoveryRO = 75;
+            pHCorrection = (int)EnumpHCorrection.None;
+            pHCorrected = 0;
+            pHCorrectionAcidDose = 0;
+        }
         // User
         [StringLength(450)]
         public string UserId { get; set; }

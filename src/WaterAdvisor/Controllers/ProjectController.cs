@@ -34,29 +34,6 @@ namespace WaterAdvisor.Controllers
             return View(projects);
         }
 
-        // GET: Project/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.Id == id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-
-            var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            if (project.UserId != currentUserId)
-            {
-                return Unauthorized();
-            }
-
-            return View(project);
-        }
-
         // GET: Project/Create
         public IActionResult Create()
         {
@@ -68,14 +45,17 @@ namespace WaterAdvisor.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProjectComment,ProjectDate,ProjectName")] Project project)
+        public IActionResult Create([Bind("Id,ProjectComment,ProjectDate,ProjectName")] Project project)
         {
             if (ModelState.IsValid)
             {
                 project.UserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
                 _context.Add(project);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                _context.SaveChanges();
+                var lastId = _context.Project.Last().Id;
+                if (Request.Cookies["lastProjectOpenedId"] != null) Response.Cookies.Delete("lastProjectOpenedId");
+                Response.Cookies.Append("lastProjectOpenedId", lastId.ToString());
+                return RedirectToAction("Index", "Home", lastId);
             }
             return View(project);
         }
