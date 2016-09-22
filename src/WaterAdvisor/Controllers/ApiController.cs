@@ -64,7 +64,7 @@ namespace WaterAdvisor.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == homeViewModel.Id);
+            var project = await _context.Project.Include(p => p.WaterIn).SingleOrDefaultAsync(m => m.Id == homeViewModel.P.Id);
             if (project == null)
             {
                 return NotFound();
@@ -158,27 +158,25 @@ namespace WaterAdvisor.Controllers
         // Load project
         private void LoadProject(HomeViewModel model, Project project)
         {
-            model.Id = project.Id;
-            model.ProjectComment = project.ProjectComment;
-            model.ProjectDate = project.ProjectDate;
-            model.ProjectName = project.ProjectName;
-            model.RecoveryRO = project.RecoveryRO;
-            model.pHCorrected = project.pHCorrected;
-            model.pHCorrection = project.pHCorrection;
-            model.pHCorrectionAcidDose = project.pHCorrectionAcidDose;
+            model.P.Id = project.Id;
+            model.P.ProjectComment = project.ProjectComment;
+            model.P.ProjectDate = project.ProjectDate;
+            model.P.ProjectName = project.ProjectName;
+            model.P.RecoveryRO = project.RecoveryRO;
+            model.P.pHCorrected = project.pHCorrected;
+            model.P.pHCorrection = project.pHCorrection;
             if (project.WaterIn != null) model.WaterIn.ImportWater(project.WaterIn);
         }
 
         // Save project
         private void SaveProject(HomeViewModel model, Project project)
         {
-            project.ProjectComment = model.ProjectComment;
-            project.ProjectDate = model.ProjectDate;
-            project.ProjectName = model.ProjectName;
-            project.RecoveryRO = model.RecoveryRO;
-            project.pHCorrected = model.pHCorrected;
-            project.pHCorrection = (ProjectBase.EnumpHCorrection) model.pHCorrection;
-            project.pHCorrectionAcidDose = model.pHCorrectionAcidDose;
+            project.ProjectComment = model.P.ProjectComment;
+            project.ProjectDate = model.P.ProjectDate;
+            project.ProjectName = model.P.ProjectName;
+            project.RecoveryRO = model.P.RecoveryRO;
+            project.pHCorrected = model.P.pHCorrected;
+            project.pHCorrection = (ProjectBase.EnumpHCorrection) model.P.pHCorrection;
             if (project.WaterIn == null) project.WaterIn = new Water();
             model.WaterIn.ExportWater(project.WaterIn);
         }
@@ -206,16 +204,13 @@ namespace WaterAdvisor.Controllers
                 //Proceed other values
                 switch (changedValueObject.Name)
                 {
-                    case "pHCorrection":
+                    case "P.pHCorrection":
                         project.pHCorrection = (ProjectBase.EnumpHCorrection) Convert.ToInt32(changedValueObject.Value);
                         break;
-                    case "pHCorrected":
+                    case "P.pHCorrected":
                         project.pHCorrected = changedValueObject.Value;
                         break;
-                    case "pHCorrectionAcidDose":
-                        project.pHCorrectionAcidDose = changedValueObject.Value;
-                        break;
-                    case "RecoveryRO":
+                    case "P.RecoveryRO":
                         project.RecoveryRO = changedValueObject.Value;
                         break;
                 }

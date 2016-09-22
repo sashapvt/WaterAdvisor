@@ -1,6 +1,6 @@
 ﻿@model WaterAdvisor.Models.Project.HomeViewModel
 @{
-    ViewData["Title"] = "Проект: " + Model.ProjectName;
+    ViewData["Title"] = "Проект: " + Model.P.ProjectName;
 }
 
 @*<h2>Аналіз води</h2>*@
@@ -10,7 +10,7 @@
             <h4>Катіони</h4>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="@Model.Id" />
             <table class="table" width="100">
                 <thead>
                     <tr>
@@ -442,8 +442,8 @@
                             Рекавері
                         </td>
                         <td>
-                            <input asp-for="@Model.RecoveryRO" class="form-control input-sm" data-bind="textInput: RecoveryRO" />
-                            <span asp-validation-for="@Model.RecoveryRO" class="text-danger" />
+                            <input asp-for="@Model.P.RecoveryRO" class="form-control input-sm" data-bind="textInput: P.RecoveryRO" />
+                            <span asp-validation-for="@Model.P.RecoveryRO" class="text-danger" />
                         </td>
                         <td>
                             %
@@ -454,38 +454,35 @@
                             Коригувати рН
                         </td>
                         <td colspan="2">
-                            <select asp-for="@Model.pHCorrection" class="form-control input-sm" data-bind="value: pHCorrection">
+                            <select asp-for="@Model.P.pHCorrection" class="form-control input-sm" data-bind="value: P.pHCorrection">
                                 <option value="0">Ні</option>
                                 <option value="1">HCl</option>
                                 <option value="2">H2SO4</option>
                             </select>
                         </td>
                     </tr>
-                    <tr data-bind="visible: (AppViewModel.pHCorrection() != 0)">
+                    <tr data-bind="visible: (AppViewModel.P.pHCorrection() != 0)">
                         <td>
                             Скоригований рН
                         </td>
                         <td>
-                            <input asp-for="@Model.pHCorrected" class="form-control input-sm" data-bind="textInput: pHCorrected" />
-                            <span asp-validation-for="@Model.pHCorrected" class="text-danger" />
+                            <input asp-for="@Model.P.pHCorrected" class="form-control input-sm" data-bind="textInput: P.pHCorrected" />
+                            <span asp-validation-for="@Model.P.pHCorrected" class="text-danger" />
                         </td>
                         <td>
                             од.
                         </td>
                     </tr>
-                    <tr data-bind="visible: (AppViewModel.pHCorrection() != 0)">
+                    <tr data-bind="visible: (AppViewModel.P.pHCorrection() != 0)">
                         <td>
                             Доза кислоти
                         </td>
-                        <td>
-                            <input asp-for="@Model.pHCorrectionAcidDose" class="form-control input-sm" data-bind="textInput: pHCorrectionAcidDose" />
-                            <span asp-validation-for="@Model.pHCorrectionAcidDose" class="text-danger" />
-                        </td>
+                        <td data-bind="text: Calc.pHCorrectionAcidDose"></td>
                         <td>
                             мг/л
                         </td>
                     </tr>
-                    <tr data-bind="visible: (AppViewModel.pHCorrection() != 0)">
+                    <tr data-bind="visible: (AppViewModel.P.pHCorrection() != 0)">
                         <td>
                             Скоригований солевміст
                         </td>

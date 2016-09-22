@@ -51,8 +51,8 @@ namespace WaterAdvisor.Controllers
                     return Unauthorized();
                 }
                 var homeViewModel = new HomeViewModel();
-                homeViewModel.Id = project.Id;
-                homeViewModel.ProjectName = project.ProjectName;
+                homeViewModel.P.Id = project.Id;
+                homeViewModel.P.ProjectName = project.ProjectName;
 
                 ViewBag.ProjectId = project.Id;
                 ViewBag.ProjectName = project.ProjectName;

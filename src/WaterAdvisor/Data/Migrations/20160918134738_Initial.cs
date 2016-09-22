@@ -61,7 +61,6 @@ namespace WaterAdvisor.Data.Migrations
                     WaterInId = table.Column<int>(nullable: true),
                     pHCorrected = table.Column<double>(nullable: false),
                     pHCorrection = table.Column<int>(nullable: false),
-                    pHCorrectionAcidDose = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

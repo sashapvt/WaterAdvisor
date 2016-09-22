@@ -45,7 +45,7 @@ $(':input').change(function (eventObject) {
     changedValueObject.ProjectId = Id;
     changedValueObject.Name = eventObject.target.name;
     changedValueObject.Value = eventObject.target.value;
-    if (changedValueObject.Name == "pHCorrection" && changedValueObject.Value == AppViewModel.pHCorrection()) return;
+    if (changedValueObject.Name == "P.pHCorrection" && changedValueObject.Value == AppViewModel.P.pHCorrection()) return;
     PostDataPartial(changedValueObject);
 });
 

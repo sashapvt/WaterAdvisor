@@ -7,18 +7,20 @@ namespace WaterAdvisor.Models.Project
 {
     public class Calc
     {
-        public Calc(WaterList waterList)
+        public Calc(ProjectBase p, WaterList waterList)
         {
+            this.p = p;
             this.w = waterList;
         }
 
+        private ProjectBase p;
         private WaterList w;
         private const double mol = 0.001;
 
         // IS (Ionic streight)
         public double IS => _IS(w);
         // CO2 concentration
-        public double CO2 => _CO2(w.Temperature, w.HCO3, w.pH);
+        public double CO2 => _CO2(w.Temperature, w.HCO3, w.pH.Value);
         // LSI index
         public double LSI => _LSI(w.TDS, w.Temperature, w.Ca, w.HCO3, w.pH);
         // S&DSI index
@@ -29,6 +31,8 @@ namespace WaterAdvisor.Models.Project
         public double IP_BaSO4 => _IP_BaSO4(w.Ba, w.SO4, IS);
         // IP SrSO4
         public double IP_SrSO4 => _IP_SrSO4(w.Sr, w.SO4, IS);
+        // Acid dose for pH correction, mg/l
+        public double pHCorrectionAcidDose => _pHCorrectionAcidDose(p.pHCorrection, p.pHCorrected, w.HCO3, w.pH, w.Temperature, _CO2(w.Temperature, w.HCO3, p.pHCorrected));
 
         #region Calculation functions
         // IS (Ionic streight)
@@ -38,10 +42,10 @@ namespace WaterAdvisor.Models.Project
         }
 
         // CO2 concentration
-        private double _CO2(WaterComponent temp, WaterComponent alk, WaterComponent pH)
+        private double _CO2(WaterComponent temp, WaterComponent alk, double pH)
         {
             double pK1 = 6.579 - 0.013 * temp.Value + 1.869e-4 * Math.Pow(temp.Value, 2) - 1.133e-6 * Math.Pow(temp.Value, 3) + 5.953e-9 * Math.Pow(temp.Value, 4); // corr of pK1 to temp 
-            double lg_CO2 = Math.Log10(alk.ValueMEq * mol) - (pH.Value - pK1);//  Henderson–Hasselbalch equation 
+            double lg_CO2 = Math.Log10(alk.ValueMEq * mol) - (pH - pK1);//  Henderson–Hasselbalch equation 
             double CO2 = Math.Pow(10, lg_CO2) * 44 * 1000; // CO2 in ppm, CO2 in conc = CO2 in feed 
             return Math.Round(CO2, 2);
         }
@@ -122,6 +126,40 @@ namespace WaterAdvisor.Models.Project
             //supersat is calculated as ratio of actual sol product to Ksp at this ionic strength with correction on temp
             double supersat = (IP / (Ksp));
             return Math.Round(supersat, 2);
+        }
+
+        // Acid dose
+        private double _pHCorrectionAcidDose(ProjectBase.EnumpHCorrection acid, double pH_adj, WaterComponent alk, WaterComponent pH, WaterComponent temp, double C_CO2)
+        {
+            if (acid == ProjectBase.EnumpHCorrection.None) return 0;
+
+            double C_coef = 1;
+            double dose = 0;
+
+            switch (acid)
+            {
+                case ProjectBase.EnumpHCorrection.HCl:
+                    // alk_coef = 1.37;
+                    C_coef = 1.21;
+                    break;
+                case ProjectBase.EnumpHCorrection.H2SO4:
+                    //alk_coef = 1.02;
+                    C_coef = 0.9;
+                    break;
+                default:
+                    // alk_coef = 0;
+                    C_coef = 1;
+                    break;
+            }
+
+            if (pH_adj < pH.Value)
+            {
+                double pK1 = 6.579 - 0.013 * temp.Value + 1.869e-4 * Math.Pow(temp.Value, 2) - 1.133e-6 * Math.Pow(temp.Value, 3) + 5.953e-9 * Math.Pow(temp.Value, 4);
+                double alk_to_CO2 = Math.Exp((pH_adj - pK1) / 0.4275);
+                double A = C_CO2 * alk_to_CO2 - (alk.ValueMEq * 50);
+                dose = (A) / (-1 * (C_coef * alk_to_CO2));
+            }
+            return Math.Round(dose, 2);
         }
         #endregion
     }

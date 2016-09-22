@@ -13,8 +13,7 @@ namespace WaterAdvisor.Models.Project
         {
             RecoveryRO = 75;
             pHCorrection = (int)EnumpHCorrection.None;
-            pHCorrected = 0;
-            pHCorrectionAcidDose = 0;
+            pHCorrected = 7;
         }
         // User
         [StringLength(450)]

@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace WaterAdvisor.Models.Project
 {
-    public class HomeViewModel : ProjectBase
+    public class HomeViewModel
     {
         public HomeViewModel()
         {
+            P = new ProjectBase();
             WaterIn = new WaterList();
-            Calc = new Calc(WaterIn);
+            Calc = new Calc(P, WaterIn);
         }
+
+        // Project Id
+        public int Id => P.Id;
+
+        // Current project
+        public ProjectBase P { get; set; }
 
         // Input water data
         public WaterList WaterIn { get; set; }
