@@ -146,7 +146,7 @@ namespace WaterAdvisor.Controllers
         {
             public int ProjectId;
             public string Name;
-            public double Value;
+            public string Value;
         }
 
         // Check if Project exists
@@ -195,7 +195,7 @@ namespace WaterAdvisor.Controllers
                 string[] NameSplitted = changedValueObject.Name.Split("."[0]);
                 if (NameSplitted.Length == 3 && NameSplitted[0] == "WaterIn")
                 {
-                    ((WaterComponent)waterIn[NameSplitted[1]])[NameSplitted[2]] = changedValueObject.Value;
+                    ((WaterComponent)waterIn[NameSplitted[1]])[NameSplitted[2]] = Convert.ToDouble(changedValueObject.Value);
                 }
                 waterIn.ExportWater(project.WaterIn);
             }
@@ -208,10 +208,14 @@ namespace WaterAdvisor.Controllers
                         project.pHCorrection = (ProjectBase.EnumpHCorrection) Convert.ToInt32(changedValueObject.Value);
                         break;
                     case "P.pHCorrected":
-                        project.pHCorrected = changedValueObject.Value;
+                        project.pHCorrected = Convert.ToDouble(changedValueObject.Value);
                         break;
                     case "P.RecoveryRO":
-                        project.RecoveryRO = changedValueObject.Value;
+                        project.RecoveryRO = Convert.ToDouble(changedValueObject.Value);
+                        break;
+                    case "PasteROSA":
+                        // Parse ROSA HTML
+
                         break;
                 }
             }

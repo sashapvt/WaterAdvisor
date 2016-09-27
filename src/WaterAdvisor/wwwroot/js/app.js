@@ -45,6 +45,7 @@ $(':input').change(function (eventObject) {
     changedValueObject.ProjectId = Id;
     changedValueObject.Name = eventObject.target.name;
     changedValueObject.Value = eventObject.target.value;
+    if (changedValueObject.Name == "PasteROSA") return;
     if (changedValueObject.Name == "P.pHCorrection" && changedValueObject.Value == AppViewModel.P.pHCorrection()) return;
     PostDataPartial(changedValueObject);
 });
@@ -62,5 +63,17 @@ $('button#buttonBalanceAnalysis').click(function () {
             AppViewModel.WaterIn.Na.ValueMEq(Na + Math.abs(SumIonsBalance));
             $("input#WaterIn_Na_ValueMEq").trigger("change");
         }
+    }
+});
+
+$('button#buttonPasteROSA').click(function () {
+    var textROSA = $('input#PasteROSA').val();
+    if (textROSA.length > 0) {
+        var changedValueObject = new Object();
+        changedValueObject.ProjectId = Id;
+        changedValueObject.Name = "PasteROSA";
+        changedValueObject.Value = textROSA;
+        PostDataPartial(changedValueObject);
+        $('input#PasteROSA').val('');
     }
 });

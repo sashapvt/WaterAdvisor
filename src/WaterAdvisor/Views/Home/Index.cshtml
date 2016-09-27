@@ -497,6 +497,13 @@
         </div>
 </div>
 
+<div class="input-group">
+    <span class="input-group-btn">
+        <button id="buttonPasteROSA" class="btn btn-sm" title="Відправити результат розрахунку ROSA">Відправити</button>
+    </span>
+    <input name="PasteROSA" class="form-control input-sm" id="PasteROSA" type="text" placeholder="Вставте результат розрахунку ROSA тут">
+</div>
+
 @section Scripts {
     <script src="~/js/app.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
