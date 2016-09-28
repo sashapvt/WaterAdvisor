@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using WaterAdvisor.Models;
 using WaterLibrary;
+using System.Globalization;
 
 namespace WaterAdvisor.Controllers
 {
@@ -196,7 +197,7 @@ namespace WaterAdvisor.Controllers
                 string[] NameSplitted = changedValueObject.Name.Split("."[0]);
                 if (NameSplitted.Length == 3 && NameSplitted[0] == "WaterIn")
                 {
-                    ((WaterComponent)waterIn[NameSplitted[1]])[NameSplitted[2]] = Convert.ToDouble(changedValueObject.Value);
+                    ((WaterComponent)waterIn[NameSplitted[1]])[NameSplitted[2]] = Convert.ToDouble(changedValueObject.Value, CultureInfo.InvariantCulture);
                 }
                 waterIn.ExportWater(project.WaterIn);
             }
@@ -209,10 +210,10 @@ namespace WaterAdvisor.Controllers
                         project.pHCorrection = (ProjectBase.EnumpHCorrection) Convert.ToInt32(changedValueObject.Value);
                         break;
                     case "P.pHCorrected":
-                        project.pHCorrected = Convert.ToDouble(changedValueObject.Value);
+                        project.pHCorrected = Convert.ToDouble(changedValueObject.Value, CultureInfo.InvariantCulture);
                         break;
                     case "P.RecoveryRO":
-                        project.RecoveryRO = Convert.ToDouble(changedValueObject.Value);
+                        project.RecoveryRO = Convert.ToDouble(changedValueObject.Value, CultureInfo.InvariantCulture);
                         break;
                     case "PasteROSA":
                         // Parse ROSA HTML
