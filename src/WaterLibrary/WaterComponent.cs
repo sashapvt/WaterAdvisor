@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace WaterAdvisor.Models.Project
+namespace WaterLibrary
 {
     public class WaterComponent
     {

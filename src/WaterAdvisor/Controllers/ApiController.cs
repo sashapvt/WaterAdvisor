@@ -10,6 +10,7 @@ using WaterAdvisor.Models.Project;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using WaterAdvisor.Models;
+using WaterLibrary;
 
 namespace WaterAdvisor.Controllers
 {
@@ -215,7 +216,9 @@ namespace WaterAdvisor.Controllers
                         break;
                     case "PasteROSA":
                         // Parse ROSA HTML
-
+                        double recovery;
+                        var RosaResult = RosaParser.ParseRosa(changedValueObject.Value, project.WaterIn, out recovery);
+                        if (RosaResult) project.RecoveryRO = recovery;
                         break;
                 }
             }

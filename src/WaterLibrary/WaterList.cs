@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace WaterAdvisor.Models.Project
+namespace WaterLibrary
 {
     public class WaterList
     {
@@ -101,7 +101,7 @@ namespace WaterAdvisor.Models.Project
         public double TDS => Math.Round(Cations().Sum(x => x.Value) + Anions().Sum(x => x.Value), 2);
 
         // Import to Water model
-        public void ImportWater(Water water)
+        public void ImportWater(WaterBase water)
         {
             // Cations
             NH4.Value = water.NH4;
@@ -137,7 +137,7 @@ namespace WaterAdvisor.Models.Project
         }
 
         // Export to Water model
-        public void ExportWater(Water water)
+        public void ExportWater(WaterBase water)
         {
             // Cations
             water.NH4 = NH4.Value;
