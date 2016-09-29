@@ -16,8 +16,26 @@ namespace RosaParserTest
             var RosaResult = RosaParser.ParseRosa(textROSA, waterIn, out recovery);
             if (RosaResult)
             {
+                // Recovery
                 Console.WriteLine("Recovery = {0}%", recovery);
+                // Cations
+                Console.WriteLine("NH4 = {0}", waterIn.NH4);
+                Console.WriteLine("K = {0}", waterIn.K);
+                Console.WriteLine("Na = {0}", waterIn.Na);
                 Console.WriteLine("Ca = {0}", waterIn.Ca);
+                Console.WriteLine("Mg = {0}", waterIn.Mg);
+                Console.WriteLine("Sr = {0}", waterIn.Sr);
+                Console.WriteLine("Ba = {0}", waterIn.Ba);
+                // Anions
+                Console.WriteLine("HCO3 = {0}", waterIn.HCO3);
+                Console.WriteLine("SO4 = {0}", waterIn.SO4);
+                Console.WriteLine("Cl = {0}", waterIn.Cl);
+                Console.WriteLine("NO3 = {0}", waterIn.NO3);
+                Console.WriteLine("F = {0}", waterIn.F);
+                Console.WriteLine("SiO2 = {0}", waterIn.SiO2);
+                // Others
+                Console.WriteLine("pH = {0}", waterIn.pH);
+                Console.WriteLine("Temperature = {0}", waterIn.Temperature);
             }
             Console.WriteLine("Press any key...");
             Console.ReadKey();
