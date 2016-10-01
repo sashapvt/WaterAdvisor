@@ -67,7 +67,7 @@ $('button#buttonBalanceAnalysis').click(function () {
 });
 
 $('button#buttonPasteROSA').click(function () {
-    var textROSA = $('input#PasteROSA').val();
+    var textROSA = $('textarea#PasteROSA').val();
     if (textROSA.length > 0) {
         var changedValueObject = new Object();
         changedValueObject.ProjectId = Id;
