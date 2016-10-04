@@ -74,6 +74,6 @@ $('button#buttonPasteROSA').click(function () {
         changedValueObject.Name = "PasteROSA";
         changedValueObject.Value = textROSA;
         PostDataPartial(changedValueObject);
-        $('input#PasteROSA').val('');
+        $('textarea#PasteROSA').val('');
     }
 });

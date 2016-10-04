@@ -10,7 +10,72 @@ namespace RosaParserTest
     {
         public static void Main(string[] args)
         {
-            string textROSA = "Project Information:  Case-specific: Вар. 1. Стандартный расчет System Details -- Pass 1 Feed Flow to Stage 1 71.67 m³/h  Pass 1 Permeate Flow 50.00 m³/h  Osmotic Pressure:    Raw Water Flow to System 66.67 m³/h  Pass 1 Recovery 75.00 %  Feed 0.17 bar  Feed Pressure 6.11 bar  Feed Temperature 20.0 C  Concentrate 0.62 bar  Flow Factor 0.85   Feed TDS 377.00 mg/l  Average 0.39 bar  Chem. Dose  None   Number of Elements 60   Average NDP 4.25 bar  Total Active Area 2452.56 M²  Average Pass 1 Flux 20.39 lmh  Power 17.37 kW  Water Classification: Surface Supply SDI < 5      Specific Energy 0.35 kWh/m³  System Recovery 56.24 %      Conc. Flow from Pass 2 0.00 m³/h  Stage Element #PV #Ele Feed Flow (m³/h)  Feed Press (bar)  Recirc Flow (m³/h)  Conc Flow (m³/h)  Conc Press (bar)  Perm Flow (m³/h)  Avg Flux (lmh)  Perm Press (bar)  Boost Press (bar)  Perm TDS (mg/l)   1 XLE-440 7 5 71.67 5.76 5.00 37.74 4.58 33.93 23.71 0.50 0.00 12.39  2 XLE-440 5 5 37.74 4.24 0.00 21.67 3.44 16.07 15.73 0.50 0.00 28.67  Pass Streams (mg/l as Ion)   Name Feed Adjusted Feed Concentrate  Permeate   Initial After Recycles Stage 1 Stage 2 Stage 1 Stage 2 Total  NH4+ + NH3 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  K 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  Na 11.78 11.78 13.94 25.48 42.61 1.11 2.39 1.52  Mg 12.20 12.20 14.67 27.58 47.50 0.30 0.73 0.44  Ca 69.14 69.14 83.13 156.36 269.34 1.67 4.09 2.45  Sr 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  Ba 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  CO3 0.14 0.14 0.21 0.81 2.61 0.00 0.00 0.00  HCO3 207.42 207.42 249.39 468.49 804.89 4.93 11.87 7.13  NO3 8.30 8.30 9.25 14.89 21.48 2.97 6.01 3.94  Cl 24.00 24.02 28.83 54.08 92.80 0.75 1.89 1.11  F 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  SO4 36.00 36.00 43.39 81.96 141.87 0.49 1.22 0.72  SiO2 8.00 8.00 9.62 18.10 31.18 0.18 0.48 0.28  Boron 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  CO2 29.60 29.60 29.60 29.86 30.61 29.50 29.97 29.67  TDS 376.98 377.00 452.43 847.75 1454.29 12.39 28.67 17.60  pH 7.00 7.00 7.07 7.31 7.51 5.46 5.82 5.61  *Permeate Flux reported by ROSA is calculated based on ACTIVE membrane area. DISCLAIMER: NO WARRANTY, EXPRESSED OR IMPLIED, AND NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, IS GIVEN. Neither FilmTec Corporation nor The Dow Chemical Company assume any obligation or liability for results obtained or damages incurred from the application of this information. Because use conditions and applicable laws may differ from one location to another and may change with time, customer is responsible for determining whether products are appropriate for customer’s use. FilmTec Corporation and The Dow Chemical Company assume no liability, if, as a result of customer's use of the ROSA membrane design software, the customer should be sued for alleged infringement of any patent not owned or controlled by the FilmTec Corporation nor The Dow Chemical Company. Reverse Osmosis System Analysis for FILMTEC™ Membranes ROSA 9.1 ConfigDB U399339_349  Project: ST-1 Case: 1  Sasha, Ecosoft 3/9/2015  Design Warnings -- Pass 1 -None- ";
+            #region var textROSA
+            string textROSA = @"Project Information: 
+
+Case-specific: 
+
+System Details -- Pass 1
+
+Feed Flow to Stage 1 26.00 m³/h  Pass 1 Permeate Flow 18.00 m³/h  Osmotic Pressure:   
+Raw Water Flow to System 24.00 m³/h  Pass 1 Recovery 74.99 %  Feed 0.33 bar 
+Feed Pressure 6.76 bar  Feed Temperature 25.0 C  Concentrate 1.21 bar 
+Flow Factor 0.85   Feed TDS 680.09 mg/l  Average 0.77 bar 
+Chem. Dose  None   Number of Elements 18   Average NDP 5.08 bar 
+Total Active Area 735.77 M²  Average Pass 1 Flux 24.46 lmh  Power 6.10 kW 
+Water Classification: Surface Water with DOW Ultrafiltration, SDI<2.5      Specific Energy 0.34 kWh/m³ 
+System Recovery 67.50 %      Conc. Flow from Pass 2 0.00 m³/h 
+
+Stage Element #PV #Ele Feed Flow
+(m³/h)  Feed Press
+(bar)  Recirc Flow
+(m³/h)  Conc Flow
+(m³/h)  Conc Press
+(bar)  Perm Flow
+(m³/h)  Avg Flux
+(lmh)  Perm Press
+(bar)  Boost Press
+(bar)  Perm TDS
+(mg/l)  
+1 BW30HRLE-440i 3 4 26.00 6.42 2.00 12.89 5.74 13.11 26.72 0.50 0.00 13.55 
+2 BW30HRLE-440i 2 3 12.89 5.39 0.00 8.00 5.02 4.89 19.94 0.50 0.00 31.05 
+
+
+Pass Streams
+(mg/l as Ion)  
+Name Feed Adjusted Feed Concentrate  Permeate  
+Initial After Recycles Stage 1 Stage 2 Stage 1 Stage 2 Total 
+NH4+ + NH3 0.28 0.31 0.37 0.76 1.18 0.05 0.08 0.06 
+K 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+Na 43.07 43.19 52.78 105.08 167.42 1.33 3.08 1.81 
+Mg 24.31 24.31 29.81 59.73 95.69 0.39 0.89 0.52 
+Ca 104.21 104.21 127.80 256.10 410.34 1.61 3.72 2.18 
+Sr 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+Ba 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+CO3 7.21 7.21 9.77 24.05 43.64 0.00 0.01 0.00 
+HCO3 414.83 414.83 506.30 1003.52 1594.70 8.80 20.10 11.87 
+NO3 8.20 8.20 9.89 19.23 29.99 0.71 1.61 0.95 
+Cl 41.00 41.00 50.33 101.03 162.11 0.47 1.09 0.64 
+F 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+SO4 36.80 36.80 45.23 90.99 146.29 0.22 0.51 0.30 
+SiO2 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+Boron 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+CO2 2.61 2.61 2.98 5.51 8.72 3.45 5.97 4.13 
+TDS 679.94 680.09 832.32 1660.50 2651.36 13.55 31.05 18.30 
+pH 8.30 8.30 8.32 8.31 8.28 6.61 6.72 6.66 
+
+
+*Permeate Flux reported by ROSA is calculated based on ACTIVE membrane area. DISCLAIMER: NO WARRANTY, EXPRESSED OR IMPLIED, AND NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, IS GIVEN. Neither FilmTec Corporation nor The Dow Chemical Company assume any obligation or liability for results obtained or damages incurred from the application of this information. Because use conditions and applicable laws may differ from one location to another and may change with time, customer is responsible for determining whether products are appropriate for customer’s use. FilmTec Corporation and The Dow Chemical Company assume no liability, if, as a result of customer's use of the ROSA membrane design software, the customer should be sued for alleged infringement of any patent not owned or controlled by the FilmTec Corporation nor The Dow Chemical Company.
+
+Reverse Osmosis System Analysis for FILMTEC™ Membranes ROSA 9.1 ConfigDB U399339_349 
+Project: TEC-17-7 Case: 1 
+,  9/28/2016 
+
+Design Warnings -- Pass 1
+
+-None- 
+";
+# endregion
             WaterBase waterIn = new WaterBase();
             double recovery;
             var RosaResult = RosaParser.ParseRosa(textROSA, waterIn, out recovery);
