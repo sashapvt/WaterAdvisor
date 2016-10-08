@@ -42,7 +42,7 @@ namespace WaterAdvisor.Controllers
 
                 if (project == null)
                 {
-                    return NotFound();
+                    return Redirect("/Project");
                 }
 
                 var currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;

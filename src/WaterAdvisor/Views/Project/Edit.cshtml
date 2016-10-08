@@ -1,14 +1,13 @@
-@model WaterAdvisor.Models.Project.Project
+﻿@model WaterAdvisor.Models.Project.Project
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Налаштування проекту";
 }
 
-<h2>Edit</h2>
+<h2>Налаштування проекту</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Project</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -36,14 +35,14 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Зберегти" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="/?id=@Model.Id">Назад</a>
 </div>
 
 @section Scripts {
