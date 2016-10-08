@@ -34,5 +34,11 @@ namespace WaterLibrary
         // Enum for determine pHCorrection
         public enum EnumpHCorrection : int { None, HCl, H2SO4 }; // 0 - none, 1 - HCl, 2 - H2SO4
 
+        // Calculated data
+        // Concentration factor (CF)
+        public double GetCF()
+        {
+            return Math.Round(1 / (1 - RecoveryRO / 100), 2);
+        }
     }
 }
